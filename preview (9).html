@@ -1,0 +1,4369 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>
+   CP12 Godot Capstone — Game Studio Guide
+  </title>
+
+<style>
+/* ==========================================================
+   CP12 GODOT CAPSTONE — GOOGLE SITES SELF-CONTAINED STYLE
+   Paste this full HTML into a Google Sites Embed > Embed Code box.
+   No external CSS file is required.
+   ========================================================== */
+:root {
+  --bg: #0a1020;
+  --bg-2: #0f172a;
+  --surface: #ffffff;
+  --surface-2: #f4f7fb;
+  --surface-3: #eaf2ff;
+  --text: #172033;
+  --text-muted: #5c6b82;
+  --text-soft: #7890a8;
+  --border: #d8e1ee;
+  --border-strong: #b9c8dc;
+  --accent: #2563eb;
+  --accent-light: #1d4ed8;
+  --accent-soft: #dbeafe;
+  --cyan: #06b6d4;
+  --cyan-soft: #cffafe;
+  --green: #16a34a;
+  --green-soft: #dcfce7;
+  --orange: #f97316;
+  --orange-soft: #ffedd5;
+  --red: #dc2626;
+  --red-soft: #fee2e2;
+  --purple: #7c3aed;
+  --purple-soft: #ede9fe;
+  --pink: #db2777;
+  --pink-soft: #fce7f3;
+  --yellow: #ca8a04;
+  --yellow-soft: #fef9c3;
+  --code-bg: #0f172a;
+  --code-border: #24324b;
+  --shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
+  --shadow-soft: 0 10px 24px rgba(15, 23, 42, 0.10);
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --sidebar-w: 292px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.65;
+  background:
+    radial-gradient(circle at top left, rgba(37,99,235,0.25), transparent 34rem),
+    radial-gradient(circle at bottom right, rgba(6,182,212,0.18), transparent 30rem),
+    linear-gradient(135deg, #08111f 0%, #101827 42%, #162033 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.38;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+a { color: var(--accent-light); text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+a:hover { color: var(--purple); }
+code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  background: rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  padding: 0.12rem 0.32rem;
+  border-radius: 0.4rem;
+  font-size: 0.88em;
+  color: #0f172a;
+}
+
+.page-wrap {
+  width: min(1480px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  gap: 1.4rem;
+  padding: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* -------------------- Sidebar -------------------- */
+.sidebar {
+  position: sticky;
+  top: 1.25rem;
+  align-self: start;
+  height: calc(100vh - 2.5rem);
+  overflow-y: auto;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: var(--radius-xl);
+  color: #e5efff;
+  background:
+    linear-gradient(180deg, rgba(15,23,42,0.96) 0%, rgba(17,24,39,0.93) 100%);
+  box-shadow: var(--shadow);
+}
+.sidebar::-webkit-scrollbar { width: 8px; }
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 999px; }
+.sidebar-logo {
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-size: 1.34rem;
+  padding: 1rem 1rem 0.25rem;
+  color: #fff;
+}
+.sidebar-logo::before {
+  content: "🎮";
+  display: inline-grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  margin-right: 0.55rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  box-shadow: 0 10px 24px rgba(37,99,235,0.32);
+  vertical-align: middle;
+}
+.sidebar-sub {
+  padding: 0 1rem 1rem;
+  color: #a8bdd8;
+  font-size: 0.84rem;
+  font-weight: 650;
+}
+.sidebar-section-label {
+  margin: 0.9rem 0.55rem 0.45rem;
+  color: #7dd3fc;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.sidebar-divider { height: 1px; margin: 0.85rem 0.4rem; background: rgba(255,255,255,0.12); }
+.sidebar nav { display: grid; gap: 0.36rem; }
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.64rem;
+  min-height: 2.7rem;
+  padding: 0.55rem 0.72rem;
+  border-radius: 0.9rem;
+  color: #d6e4f5;
+  text-decoration: none;
+  font-size: 0.91rem;
+  font-weight: 760;
+  border: 1px solid transparent;
+  transition: transform .16s ease, background .16s ease, border-color .16s ease;
+}
+.sidebar nav a:hover {
+  transform: translateX(2px);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.10);
+}
+.sidebar nav a.active {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(6,182,212,0.85));
+  box-shadow: 0 12px 24px rgba(6,182,212,0.18);
+}
+.nav-num {
+  display: inline-grid;
+  place-items: center;
+  min-width: 2rem;
+  height: 2rem;
+  border-radius: 0.75rem;
+  color: #eff6ff;
+  background: rgba(255,255,255,0.10);
+  font-weight: 900;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+.sidebar nav a.active .nav-num { background: rgba(255,255,255,0.22); color: #fff; }
+
+/* -------------------- Main shell -------------------- */
+.main {
+  min-width: 0;
+  padding: 0.1rem 0 3rem;
+}
+.section {
+  display: none;
+  animation: sectionFade .25s ease-out;
+}
+.section.active { display: block; }
+@keyframes sectionFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section {
+  background: rgba(255,255,255,0.94);
+  border: 1px solid rgba(255,255,255,0.34);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.2rem, 3vw, 2.4rem);
+  overflow: hidden;
+}
+.section::before {
+  content: "";
+  display: block;
+  height: 7px;
+  margin: calc(-1 * clamp(1.2rem, 3vw, 2.4rem)) calc(-1 * clamp(1.2rem, 3vw, 2.4rem)) 1.45rem;
+  background: linear-gradient(90deg, var(--accent), var(--cyan), var(--green));
+}
+
+.page-header {
+  position: relative;
+  padding: clamp(1.3rem, 3.2vw, 2.2rem);
+  margin: 0 0 1.8rem;
+  border-radius: var(--radius-xl);
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 22%, rgba(255,255,255,0.24), transparent 12rem),
+    linear-gradient(135deg, #1d4ed8 0%, #0f766e 58%, #111827 100%);
+  box-shadow: 0 18px 44px rgba(37,99,235,0.24);
+  overflow: hidden;
+}
+.page-header::after {
+  content: "</>";
+  position: absolute;
+  right: 1.35rem;
+  bottom: -1.25rem;
+  color: rgba(255,255,255,0.12);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 900;
+  letter-spacing: -0.12em;
+}
+.lesson-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.34rem 0.7rem;
+  border-radius: 999px;
+  color: #e0f2fe;
+  background: rgba(15,23,42,0.42);
+  border: 1px solid rgba(255,255,255,0.18);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.lesson-tag::before { content: "Capstone"; display: none; }
+.page-header h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0.75rem 0 0.3rem;
+  max-width: 830px;
+  color: #fff;
+  font-size: clamp(2rem, 4.5vw, 4.3rem);
+  line-height: 0.98;
+  letter-spacing: -0.07em;
+}
+.page-subtitle {
+  position: relative;
+  z-index: 1;
+  max-width: 850px;
+  margin: 0.7rem 0 0;
+  color: #dbeafe;
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  line-height: 1.55;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 2.1rem 0 0.75rem;
+  color: #0f172a;
+  font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+h2::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.68rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--cyan));
+  box-shadow: 0 8px 18px rgba(37,99,235,0.22);
+}
+h3 { color: #111827; letter-spacing: -0.018em; }
+p { margin: 0.65rem 0 1rem; }
+ul, ol { padding-left: 1.35rem; }
+li { margin: 0.22rem 0; }
+strong { color: #0f172a; }
+
+/* -------------------- Cards and grids -------------------- */
+.studio-grid, .track-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.1rem 0 1.4rem;
+}
+.studio-card, .track-card, .download-card, .proposal-field {
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.studio-card::before, .track-card::before, .download-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--accent), var(--cyan));
+}
+.studio-card strong {
+  display: block;
+  color: #0f172a;
+  font-size: 1.02rem;
+  margin-bottom: 0.3rem;
+}
+.studio-card p, .studio-card li, .track-card p, .track-card li {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.track-card.track-2d::before { background: linear-gradient(90deg, var(--accent), var(--cyan)); }
+.track-card.track-3d::before { background: linear-gradient(90deg, var(--green), #22c55e); }
+.track-card.track-open::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+.track-card h3 { margin: 0.25rem 0 0.55rem; font-size: 1.2rem; }
+.track-card h3.t2d { color: var(--accent-light); }
+.track-card h3.t3d { color: var(--green); }
+.track-card h3.topen { color: var(--purple); }
+.track-card[style*="grid-column"] { min-height: 0; }
+
+/* -------------------- Outcome and callout boxes -------------------- */
+.outcome-box {
+  position: relative;
+  margin: 1rem 0 1.35rem;
+  padding: 1rem 1.1rem 1rem 1.15rem;
+  background:
+    linear-gradient(135deg, rgba(219,234,254,0.95), rgba(207,250,254,0.7));
+  border: 1px solid #bfdbfe;
+  border-left: 6px solid var(--accent);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 28px rgba(37,99,235,0.10);
+}
+.outcome-label, .callout-label, .proposal-label {
+  margin-bottom: 0.45rem;
+  color: #1e3a8a;
+  font-size: 0.72rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+}
+.outcome-box p, .outcome-box li { color: #334155; font-size: 0.92rem; }
+.outcome-box ul { margin: 0.2rem 0 0; padding-left: 1.25rem; }
+.outcome-code {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.35rem;
+  padding: 0.06rem 0.38rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-weight: 950;
+  white-space: nowrap;
+}
+.callout {
+  position: relative;
+  margin: 1.15rem 0 1.35rem;
+  padding: 1rem 1.15rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  box-shadow: var(--shadow-soft);
+}
+.callout p:last-child, .callout ul:last-child { margin-bottom: 0; }
+.callout::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  background: var(--accent);
+}
+.callout.why { background: linear-gradient(135deg, #eff6ff, #ffffff); border-color: #bfdbfe; }
+.callout.why::before { background: var(--accent); }
+.callout.warn { background: linear-gradient(135deg, #fff7ed, #ffffff); border-color: #fed7aa; }
+.callout.warn::before { background: var(--orange); }
+.callout.warn .callout-label { color: #9a3412; }
+.callout.check { background: linear-gradient(135deg, #f0fdf4, #ffffff); border-color: #bbf7d0; }
+.callout.check::before { background: var(--green); }
+.callout.check .callout-label { color: #166534; }
+.callout.next { background: linear-gradient(135deg, #f5f3ff, #ffffff); border-color: #ddd6fe; }
+.callout.next::before { background: var(--purple); }
+.callout.next .callout-label { color: #5b21b6; }
+.callout.godot { background: linear-gradient(135deg, #ecfeff, #ffffff); border-color: #a5f3fc; }
+.callout.godot::before { background: var(--cyan); }
+.callout.godot .callout-label { color: #155e75; }
+
+/* -------------------- Tables -------------------- */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 1.4rem;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+th {
+  padding: 0.78rem 0.85rem;
+  text-align: left;
+  color: #eaf2ff;
+  background: linear-gradient(135deg, #1e3a8a, #0f766e);
+  border-right: 1px solid rgba(255,255,255,0.16);
+  font-size: 0.74rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: 0.075em;
+}
+th:last-child { border-right: none; }
+td {
+  padding: 0.82rem 0.88rem;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+  font-size: 0.92rem;
+}
+td:last-child { border-right: none; }
+tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: #f8fafc; }
+.scope-table .ok { color: var(--green); font-weight: 900; }
+.scope-table .warn-scope { color: var(--orange); font-weight: 900; }
+.scope-table .no { color: var(--red); font-weight: 900; }
+.axis-table td:first-child, .scope-table td:first-child { font-weight: 780; color: #0f172a; }
+
+.rubric-table { font-size: 0.86rem; }
+.rubric-table th:first-child { width: 18%; }
+.rubric-table .criterion { font-weight: 900; color: #0f172a; }
+.rubric-table .criterion small { color: var(--text-muted) !important; }
+.rubric-table .level-header { text-align: center; }
+.rubric-table .level-header.l4 { background: linear-gradient(135deg, #166534, #16a34a); color: #fff; }
+.rubric-table .level-header.l3 { background: linear-gradient(135deg, #1d4ed8, #0891b2); color: #fff; }
+.rubric-table .level-header.l2 { background: linear-gradient(135deg, #c2410c, #f97316); color: #fff; }
+.rubric-table .level-header.l1 { background: linear-gradient(135deg, #991b1b, #dc2626); color: #fff; }
+.rubric-table .level-4 { background: #f0fdf4; }
+.rubric-table .level-3 { background: #eff6ff; }
+.rubric-table .level-2 { background: #fff7ed; }
+.rubric-table .level-1 { background: #fef2f2; }
+
+/* -------------------- Proposal, downloads, resources -------------------- */
+.download-card {
+  border-top: none;
+  background:
+    radial-gradient(circle at 92% 15%, rgba(34,197,94,0.18), transparent 10rem),
+    linear-gradient(135deg, #f8fafc, #ffffff);
+}
+.download-card::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+.download-card a.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  text-decoration: none;
+  font-weight: 950;
+  box-shadow: 0 12px 22px rgba(37,99,235,0.22);
+}
+.download-card a.download-button::before { content: "⬇"; }
+.download-card a.download-button:hover { filter: brightness(1.03); transform: translateY(-1px); }
+.resource-list .studio-card::before { background: linear-gradient(90deg, var(--purple), var(--cyan)); }
+.resource-list a { color: var(--accent-light); font-weight: 900; }
+.resource-note, .proposal-hint { color: var(--text-muted); font-size: 0.86rem; }
+.proposal-blank {
+  min-height: 1.7rem;
+  border-bottom: 1px dashed var(--border-strong);
+  margin-top: 0.25rem;
+}
+
+.template-box {
+  margin: 1rem 0 1.4rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius-lg);
+  color: #dbeafe;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(6,182,212,0.16), transparent 10rem),
+    linear-gradient(135deg, #0f172a, #111827);
+  border: 1px solid var(--code-border);
+  box-shadow: var(--shadow-soft);
+}
+.template-box h3 { color: #fff; margin-top: 0; }
+.template-box p, .template-box li { color: #dbeafe; }
+.template-box code {
+  display: inline;
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+  color: #e0f2fe;
+  white-space: normal;
+}
+
+/* -------------------- Nice visual details -------------------- */
+.section p + .studio-grid, .section p + .track-grid { margin-top: 0.7rem; }
+.section > :last-child { margin-bottom: 0; }
+hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+::selection { background: #bfdbfe; color: #0f172a; }
+
+/* -------------------- Responsive -------------------- */
+@media (max-width: 980px) {
+  .page-wrap {
+    grid-template-columns: 1fr;
+    padding: 0.85rem;
+  }
+  .sidebar {
+    position: relative;
+    top: auto;
+    height: auto;
+    max-height: none;
+  }
+  .sidebar nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .main { padding-bottom: 1.5rem; }
+}
+@media (max-width: 720px) {
+  .studio-grid, .track-grid { grid-template-columns: 1fr; }
+  .sidebar nav { grid-template-columns: 1fr; }
+  .section { padding: 1rem; border-radius: 18px; }
+  .section::before { margin: -1rem -1rem 1rem; }
+  .page-header { padding: 1.2rem; border-radius: 18px; }
+  table { display: block; overflow-x: auto; white-space: normal; }
+  th, td { min-width: 160px; }
+}
+@media print {
+  body { background: #fff; }
+  body::before, .sidebar, .section::before, .page-header::after { display: none !important; }
+  .page-wrap { display: block; padding: 0; }
+  .section { display: block !important; box-shadow: none; border: none; page-break-after: always; }
+  a { color: #000; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+<div class="sidebar-logo">
+     CP12 Godot Capstone
+    </div>
+<div class="sidebar-sub">
+     Grade 12 · Game Studio Project
+    </div>
+<div class="sidebar-section-label">
+     Capstone Guide
+    </div>
+<nav>
+<a class="active" data-section="overview" href="#">
+<span class="nav-num">
+       ★
+      </span>
+      Overview
+     </a>
+<a data-section="studio" href="#">
+<span class="nav-num">
+       1
+      </span>
+      Studio Model
+     </a>
+<a data-section="collab" href="#">
+<span class="nav-num">GIT</span>
+      Collaboration
+     </a>
+<a data-section="site" href="#">
+<span class="nav-num">
+       2
+      </span>
+      Google Site
+     </a>
+<a data-section="logs" href="#">
+<span class="nav-num">
+       3
+      </span>
+      Daily Logs
+     </a>
+<a data-section="ai" href="#">
+<span class="nav-num">
+       AI
+      </span>
+      AI Rules
+     </a>
+<a data-section="resources" href="#">
+<span class="nav-num">
+       R
+      </span>
+      Free Resources
+     </a>
+<a data-section="tracks" href="#">
+<span class="nav-num">
+       4
+      </span>
+      Choose Track
+     </a>
+<a data-section="proposal" href="#">
+<span class="nav-num">
+       5
+      </span>
+      Proposal
+     </a>
+<a data-section="scope" href="#">
+<span class="nav-num">
+       6
+      </span>
+      Scope
+     </a>
+<a data-section="presentation" href="#">
+<span class="nav-num">
+       7
+      </span>
+      Game Jam Demo
+     </a>
+<a data-section="rubric" href="#">
+<span class="nav-num">
+       8
+      </span>
+      Rubric
+     </a>
+<a data-section="checklist" href="#">
+<span class="nav-num">
+       9
+      </span>
+      Checklist
+     </a>
+</nav>
+</aside>
+<!-- ============ MAIN ============ -->
+<main class="main">
+<!-- ======================================================
+         OVERVIEW
+         ====================================================== -->
+<section class="section active" id="section-overview">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone Project
+      </span>
+<h1>
+       Game Studio Capstone
+      </h1>
+<p class="page-subtitle">
+       Work as a small studio team to design, build, document, test, publish, and present an original Godot game.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         4.1
+        </span>
+        - analyze a problem
+       </li>
+<li>
+<span class="outcome-code">
+         4.5
+        </span>
+        - build and deploy a solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - create project documentation
+       </li>
+<li>
+<span class="outcome-code">
+         4.8
+        </span>
+        - present the solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.9
+        </span>
+        - reflect on the solution, process, and learning
+       </li>
+</ul>
+</div>
+<h2>
+      What the Capstone Is
+     </h2>
+<p>
+      The capstone is a
+      <strong>
+       team-based game-jam project
+      </strong>
+      built in Godot 4 over several class periods. Your team will choose a small game concept, define roles, build a working prototype, publish a Google Site portfolio, complete daily progress logs, and present the finished game to the class.
+     </p>
+<p>
+      The goal is not to ship a huge game. The goal is to show that you can use the parts of the Godot game system, work with others, use resources responsibly, explain your code, and reflect on your process.
+     </p>
+<div class="callout why">
+<div class="callout-label">
+       Why a studio project?
+      </div>
+<p>
+       Computer Programming 12 asks you to plan a realistic project, collaborate, choose resources, build and deploy a solution, document your work, test and refine it, present it, and reflect on your learning. A small game studio project lets you do all of that in one meaningful package.
+      </p>
+</div>
+<h2>
+      Required Project Evidence
+     </h2>
+<div class="studio-grid">
+<div class="studio-card">
+<strong>
+        Proposal DOCX
+       </strong>
+<p>
+        A completed team proposal template linked from your Google Site before serious build work begins.
+        <a href="https://docs.google.com/document/d/1bm-wXMLSOdGR_Bn9Qi6ioLSiJUqFXFsOaAbjZS1LKlI/edit?usp=sharing">
+         Download the template
+        </a>
+        .
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Playable Godot Game
+       </strong>
+<p>
+        A small 2D or 3D game with player action, a challenge, feedback, and a win/lose or completion condition.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Published Google Site
+       </strong>
+<p>
+        Your public project portfolio: team page, pitch, plan, daily logs, screenshots, AI-use log, testing notes, and final reflection.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Daily Dev Logs
+       </strong>
+<p>
+        Every student logs what they did each class, what changed, what problem they hit, what AI or resources they used, and what comes next.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Game Jam Presentation
+       </strong>
+<p>
+        Your team demos the game live and each student answers questions about code, design choices, AI use, and their contribution.
+       </p>
+</div>
+</div>
+<h2>
+      Timeline Overview
+     </h2>
+<table class="axis-table">
+<thead>
+<tr>
+<th>
+         Phase
+        </th>
+<th>
+         What You Do
+        </th>
+<th>
+         Deliverable
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Studio Setup
+        </td>
+<td>
+         Form team, choose roles, create Google Site, submit URL to class tracker
+        </td>
+<td>
+         Published site URL
+        </td>
+</tr>
+<tr>
+<td>
+         Pitch + Plan
+        </td>
+<td>
+         Choose track, write proposal, define MVG, assign first sprint tasks
+        </td>
+<td>
+         Approved proposal
+        </td>
+</tr>
+<tr>
+<td>
+         Prototype
+        </td>
+<td>
+         Build the core loop: player action, challenge, win/lose
+        </td>
+<td>
+         Playable build #1
+        </td>
+</tr>
+<tr>
+<td>
+         Develop
+        </td>
+<td>
+         Add required features, test, document, revise plan
+        </td>
+<td>
+         Playable build #2 + logs
+        </td>
+</tr>
+<tr>
+<td>
+         Game Jam
+        </td>
+<td>
+         Publish final evidence, demo game, answer code-defense questions
+        </td>
+<td>
+         Live demo + Q&amp;A
+        </td>
+</tr>
+</tbody>
+</table>
+<div class="callout godot">
+<div class="callout-label">
+       What "done" means for this course
+      </div>
+<p>
+       A game is done when: it starts, the player can interact with it, something interesting happens as a result, and it ends or loops. You do not need music, professional art, a main menu, settings screens, or save files — those are polish, not the game. Get the core loop working and tested first. Then polish if time allows.
+      </p>
+</div>
+<div class="callout next">
+<div class="callout-label">
+       Where to start
+      </div>
+<p>
+       Start with
+       <strong>
+        Studio Model
+       </strong>
+       . You need a team structure, Google Site, and daily tracking system before your team begins serious coding.
+      </p>
+</div>
+</section>
+<!-- end overview -->
+<!-- ======================================================
+         STUDIO MODEL
+         ====================================================== -->
+<section class="section" id="section-studio">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 1
+      </span>
+<h1>
+       Studio Model
+      </h1>
+<p class="page-subtitle">
+       Build as a team, but prove your own learning. The group owns the game; each student owns their contribution.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         3.1
+        </span>
+        - work individually and collaboratively to create solutions
+       </li>
+<li>
+<span class="outcome-code">
+         4.2
+        </span>
+        - develop a project plan with roles, resources, steps, and deadlines
+       </li>
+<li>
+<span class="outcome-code">
+         4.3
+        </span>
+        - demonstrate collaborative skills and behaviours
+       </li>
+<li>
+<span class="outcome-code">
+         4.10
+        </span>
+        - explore IT roles and career paths
+       </li>
+</ul>
+</div>
+<h2>
+      Team Size
+     </h2>
+<p>
+      Teams should usually be
+      <strong>
+       2-4 students
+      </strong>
+      . A solo project is allowed only with teacher approval. A team larger than 4 needs a very clear role plan because it becomes too easy for one person to disappear inside the group.
+     </p>
+<div class="callout warn">
+<div class="callout-label">
+       Group project rule
+      </div>
+<p>
+       The team receives one shared product score for the game and site, but each student also receives individual evidence scores from their daily logs, code explanation, presentation answers, and documented contribution. You cannot hide inside a strong team, and you cannot carry a team without evidence.
+      </p>
+</div>
+<h2>
+      Solo Approved Track
+     </h2>
+<p>
+      A solo project requires teacher approval before the proposal is submitted. If approved, the student selects
+      <strong>
+       Solo Approved
+      </strong>
+      as their track in the class tracker. All of the following rules apply.
+     </p>
+<div class="callout godot">
+<div class="callout-label">
+       What changes on the solo track
+      </div>
+<p>
+       A solo student takes on the Coder role as their primary responsibility plus one secondary role (usually Producer or Level Builder). All scripts are entirely their own work — there is no team to share credit with, which actually makes CP12 outcomes easier to verify. Scope is adjusted downward to reflect one person working alone, but the evidence requirements are identical.
+      </p>
+</div>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Requirement
+        </th>
+<th>
+         Team (2–5 students)
+        </th>
+<th>
+         Solo Approved
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Gameplay scenes
+        </td>
+<td>
+         2–3 playable scenes minimum
+        </td>
+<td>
+         1 complete playable scene
+        </td>
+</tr>
+<tr>
+<td>
+         Required scripts
+        </td>
+<td>
+         One per student based on role
+        </td>
+<td>
+         Player movement + one mechanic + one UI script minimum
+        </td>
+</tr>
+<tr>
+<td>
+         Interactive mechanics
+        </td>
+<td>
+         2+ mechanics across the team
+        </td>
+<td>
+         1 mechanic (pickup, hazard, or door)
+        </td>
+</tr>
+<tr>
+<td>
+         Audio
+        </td>
+<td>
+         Shared stretch task or Sound Designer role
+        </td>
+<td>
+         Optional stretch — not required
+        </td>
+</tr>
+<tr>
+<td>
+         Google Site
+        </td>
+<td>
+         Team site — all members contribute pages
+        </td>
+<td>
+         Individual site — all six pages still required
+        </td>
+</tr>
+<tr>
+<td>
+         Demo
+        </td>
+<td>
+         Team presents together
+        </td>
+<td>
+         Solo demo — all code-defense questions answered alone
+        </td>
+</tr>
+<tr>
+<td>
+         Teacher check-in
+        </td>
+<td>
+         Weekly team tracker review
+        </td>
+<td>
+         Weekly 1-on-1 check-in — mandatory, not optional
+        </td>
+</tr>
+</tbody>
+</table>
+<div class="callout warn">
+<div class="callout-label">
+       Solo does not mean easier
+      </div>
+<p>
+       Working alone removes the accountability of teammates. The weekly teacher check-in is mandatory for solo students. If a solo student misses two consecutive check-ins or has no log evidence for a week, they will be redirected to join an existing team.
+      </p>
+</div>
+<h2>
+      The Five Roles
+     </h2>
+<div class="studio-grid">
+<div class="studio-card">
+<strong>
+        Producer
+       </strong>
+<p>
+        Writes the game concept, runs daily stand-ups, keeps the sprint board updated, manages scope, coordinates asset integration, and leads the final presentation.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Coder
+       </strong>
+<p>
+        Programs player movement, core mechanics, collision, win/lose logic, debugging, and final code documentation. The central technical role.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Artist
+       </strong>
+<p>
+        Creates reference images, concept art, an art style guide, all sprites or 3D materials, and delivers final assets in the correct format for integration.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Level Builder
+       </strong>
+<p>
+        Researches level design, sketches layouts, builds playable levels in Godot (TileMap or 3D scene), designs difficulty progression, and tests all interactive elements.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Sound Designer
+       </strong>
+<p>
+        Creates or sources background music and sound effects, writes an audio style guide, integrates all audio into the game build, and balances levels. Best suited for teams of 5.
+       </p>
+</div>
+</div>
+<div class="callout warn">
+<div class="callout-label">
+       CP12 code requirement — every role, no exceptions
+      </div>
+<p>
+       This is a programming course. Every student must author and be able to explain at least one complete GDScript file at the game jam demo. Your role determines
+       <em>
+        which
+       </em>
+       script — it does not excuse you from writing one. A student who cannot explain their code during the demo cannot score above Level 2 on the Technical criterion regardless of their role.
+      </p>
+</div>
+<h2>
+      Required Script by Role
+     </h2>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Role
+        </th>
+<th>
+         Required script
+        </th>
+<th>
+         Key concepts demonstrated
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+          Producer
+         </strong>
+</td>
+<td>
+         UI manager script — CanvasLayer with score label, health display, and win/lose screen logic
+        </td>
+<td>
+<code>
+          Label.text
+         </code>
+         , game state variables, signal connections, scene switching
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          Coder
+         </strong>
+</td>
+<td>
+         Player movement script plus at least one additional mechanic (pickup, hazard, enemy, timer)
+        </td>
+<td>
+         Physics loop,
+         <code>
+          velocity
+         </code>
+         ,
+         <code>
+          move_and_slide()
+         </code>
+         , input, collision response
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          Artist
+         </strong>
+</td>
+<td>
+         AnimatedSprite2D state machine — idle, run, jump states with
+         <code>
+          flip_h
+         </code>
+         direction
+        </td>
+<td>
+<code>
+          @onready
+         </code>
+         ,
+         <code>
+          play()
+         </code>
+         , if/elif state logic,
+         <code>
+          is_on_floor()
+         </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+          Level Builder
+         </strong>
+</td>
+<td>
+         At least one interactive scene script — hazard, pickup, door, or level transition
+        </td>
+<td>
+<code>
+          Area2D
+         </code>
+         /
+         <code>
+          Area3D
+         </code>
+         ,
+         <code>
+          body_entered
+         </code>
+         signal,
+         <code>
+          queue_free()
+         </code>
+         or
+         <code>
+          change_scene_to_file()
+         </code>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+          Sound Designer
+         </strong>
+</td>
+<td>
+         Audio manager script — AudioStreamPlayer nodes wired to game events via signals
+        </td>
+<td>
+         Signal connections,
+         <code>
+          play()
+         </code>
+         ,
+         <code>
+          stop()
+         </code>
+         , conditional audio logic
+        </td>
+</tr>
+</tbody>
+</table>
+<h2>
+      Role Combinations for Smaller Teams
+     </h2>
+<p>
+      Not every team will have five members. Use these combinations — each student still owns their required script.
+     </p>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Team size
+        </th>
+<th>
+         Recommended combination
+        </th>
+<th>
+         Audio note
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+          2 students
+         </strong>
+</td>
+<td>
+         Producer + Coder / Artist + Level Builder
+        </td>
+<td>
+         Source audio from free libraries (itch.io, Kenney.nl, Freesound). Log the source in your AI/Resource page.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          3 students
+         </strong>
+</td>
+<td>
+         Producer + Level Builder / Coder / Artist
+        </td>
+<td>
+         Same — free library audio. The Level Builder's required script covers the interactive scenes; the Producer's script covers the UI.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          4 students
+         </strong>
+</td>
+<td>
+         Producer / Coder / Artist / Level Builder
+        </td>
+<td>
+         Audio is a shared stretch task. Whoever finishes their core script first takes on the audio integration.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          5 students
+         </strong>
+</td>
+<td>
+         All five roles as written
+        </td>
+<td>
+         Sound Designer owns the full audio pipeline and their required script.
+        </td>
+</tr>
+</tbody>
+</table>
+<p>
+      Roles define your primary focus area — not a ceiling. A Level Builder who wants to write more code should. An Artist who finishes their script early should help test. The role structure is there to make sure no one is idle and no one is doing everything alone.
+     </p>
+<h2>
+      Daily Team Stand-Up
+     </h2>
+<p>
+      At the beginning of each class, teams answer these three questions in under two minutes:
+     </p>
+<ol>
+<li>
+       What did we finish last class?
+      </li>
+<li>
+       What are we building today?
+      </li>
+<li>
+       What is blocked or confusing?
+      </li>
+</ol>
+<h2>
+      Ability Levels
+     </h2>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Student Need
+        </th>
+<th>
+         Best Contribution Path
+        </th>
+<th>
+         Evidence They Can Show
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Still new to coding
+        </td>
+<td>
+         Build from warm-up templates, tune constants, add labels, place scenes, document testing
+        </td>
+<td>
+         Annotated script, screenshots, test notes, small script edits
+        </td>
+</tr>
+<tr>
+<td>
+         Comfortable with basics
+        </td>
+<td>
+         Own one full mechanic such as pickups, health, enemy patrol, UI, timer, or level transition
+        </td>
+<td>
+         Working feature, code explanation, bug log
+        </td>
+</tr>
+<tr>
+<td>
+         Advanced
+        </td>
+<td>
+         Build a stretch system such as 3D navigation, shader, save-like progression, better enemy AI, or reusable manager script
+        </td>
+<td>
+         Feature demo, code defense, resource notes, tested fallback plan
+        </td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- end studio -->
+
+<!-- ======================================================
+         COLLABORATION STYLES
+         ====================================================== -->
+<style>
+.collab-options{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.5rem 0}
+@media(max-width:720px){.collab-options{grid-template-columns:1fr}}
+.opt-card{border-radius:16px;padding:22px 20px;border:2px solid;position:relative;overflow:hidden}
+.opt-card::before{content:'';position:absolute;top:0;left:0;width:5px;height:100%}
+.opt-card.drive{border-color:#86efac;background:linear-gradient(135deg,#f0fdf4,#fff)}
+.opt-card.drive::before{background:#16a34a}
+.opt-card.github{border-color:#93c5fd;background:linear-gradient(135deg,#eff6ff,#fff)}
+.opt-card.github::before{background:#2563eb}
+.opt-badge{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.drive .opt-badge{background:#dcfce7;color:#166534}
+.github .opt-badge{background:#dbeafe;color:#1e3a8a}
+.opt-card h3{margin:0 0 8px;font-size:1.1rem;color:#0f172a}
+.opt-card p{margin:0 0 12px;font-size:.87rem;color:#374151}
+.opt-checks{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.opt-checks li{font-size:.82rem;padding-left:1.2em;position:relative}
+.opt-checks li::before{position:absolute;left:0}
+.opt-checks .pro::before{content:'✓';color:#16a34a;font-weight:900}
+.opt-checks .con::before{content:'✗';color:#dc2626;font-weight:900}
+.ownership-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:1rem 0}
+@media(max-width:720px){.ownership-grid{grid-template-columns:repeat(2,1fr)}}
+.role-own{border-radius:12px;padding:14px 10px;text-align:center}
+.role-own .ricon{font-size:1.6rem;display:block;margin-bottom:4px}
+.role-own .rname{font-size:.76rem;font-weight:800;display:block;margin-bottom:7px}
+.role-own .ftag{display:block;font-family:"SFMono-Regular",Consolas,monospace;font-size:.67rem;background:rgba(0,0,0,.07);border-radius:4px;padding:2px 5px;margin:2px auto;width:fit-content;color:#1e293b;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.flow-label{font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--text-muted);margin:1.25rem 0 .6rem}
+.flow-row{display:flex;align-items:stretch;gap:0}
+.fbox{flex:1;border-radius:12px;padding:16px 12px;text-align:center;min-width:0}
+.fnum{width:28px;height:28px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:.82rem;margin-bottom:8px}
+.ftitle{font-weight:700;font-size:.88rem;display:block;margin-bottom:6px;color:#0f172a}
+.fdesc{font-size:.78rem;line-height:1.55;color:#374151}
+.fcode{font-family:monospace;font-size:.7rem;background:rgba(0,0,0,.08);padding:2px 6px;border-radius:4px;display:inline-block;margin-top:3px;white-space:nowrap}
+.farrow{display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#cbd5e1;padding:0 5px;flex-shrink:0}
+@media(max-width:650px){.flow-row{flex-direction:column;gap:8px}.farrow{transform:rotate(90deg);align-self:center;padding:4px 0}}
+.setup-steps{counter-reset:step;list-style:none;padding:0;margin:.75rem 0 1.25rem;display:grid;gap:8px}
+.setup-steps li{counter-increment:step;display:flex;align-items:flex-start;gap:10px;font-size:.87rem;color:#1e293b}
+.setup-steps li::before{content:counter(step);min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.75rem;flex-shrink:0;margin-top:1px}
+.setup-steps.green li::before{background:#dcfce7;color:#166534}
+.setup-steps.blue li::before{background:#dbeafe;color:#1e3a8a}
+.setup-steps li strong{color:#0f172a}
+</style>
+
+<!-- ======================================================
+         COLLABORATION
+         ====================================================== -->
+<section class="section" id="section-collab">
+<div class="page-header">
+<span class="lesson-tag capstone">Capstone · Studio</span>
+<h1>Team Collaboration</h1>
+<p class="page-subtitle">Godot is not Google Docs. Here is how your team shares work without overwriting each other.</p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">CP12 outcomes evidenced in this section</div>
+<ul>
+<li><span class="outcome-code">3.1</span> — work individually and collaboratively to develop solutions</li>
+<li><span class="outcome-code">4.3</span> — manage project tasks, timelines, and team communication</li>
+</ul>
+</div>
+
+<div class="callout warn">
+<div class="callout-label">Why Godot can't share like Google Docs</div>
+<p>In Google Docs, multiple people type in the same document at the same time. Godot project files — scenes (<code>.tscn</code>) and scripts (<code>.gd</code>) — are saved locally on one computer. If two people try to edit the same file at the same time and both save it, one person's work will overwrite the other's. The solution is not a special app — it is a clear rule about who owns which files.</p>
+</div>
+
+<h2>The One Rule That Makes Teamwork Work</h2>
+<p>Each team member owns specific files based on their role. <strong>You only ever edit your own files.</strong> You never open, move, or rename someone else's scene or script. This one rule prevents nearly every conflict.</p>
+
+<div class="ownership-grid">
+<div class="role-own" style="background:#e8f0fe">
+<span class="ricon">📋</span>
+<span class="rname" style="color:#1a237e">Producer</span>
+<span class="ftag">hud.gd</span>
+<span class="ftag">main_menu.tscn</span>
+<span class="ftag">ui.tscn</span>
+</div>
+<div class="role-own" style="background:#e6f4ea">
+<span class="ricon">💻</span>
+<span class="rname" style="color:#1b5e20">Coder</span>
+<span class="ftag">player.gd</span>
+<span class="ftag">player.tscn</span>
+<span class="ftag">enemy.gd</span>
+</div>
+<div class="role-own" style="background:#fce5cd">
+<span class="ricon">🎨</span>
+<span class="rname" style="color:#b45309">Artist</span>
+<span class="ftag">res://sprites/</span>
+<span class="ftag">res://tiles/</span>
+<span class="ftag">AnimSprite.gd</span>
+</div>
+<div class="role-own" style="background:#ead1dc">
+<span class="ricon">🗺️</span>
+<span class="rname" style="color:#880e4f">Level Builder</span>
+<span class="ftag">level_1.tscn</span>
+<span class="ftag">level_2.tscn</span>
+<span class="ftag">hazard.gd</span>
+</div>
+<div class="role-own" style="background:#d9d2e9">
+<span class="ricon">🔊</span>
+<span class="rname" style="color:#4a148c">Sound Designer</span>
+<span class="ftag">res://audio/</span>
+<span class="ftag">audio_mgr.gd</span>
+<span class="ftag">music.tscn</span>
+</div>
+</div>
+
+<h2>Choose Your System</h2>
+<p>Both options work on school computers with no software installs. Choose one per team and stick with it for the whole project.</p>
+
+<div class="collab-options">
+<div class="opt-card drive">
+<div class="opt-badge">⭐ Option 1 — Simplest</div>
+<h3>Google Drive Shared Folder</h3>
+<p>Uses your school Google account. No new accounts or tools. Everyone already knows Drive.</p>
+<ul class="opt-checks">
+<li class="pro">No new accounts needed</li>
+<li class="pro">Works on every school computer</li>
+<li class="pro">Zero learning curve</li>
+<li class="con">No version history</li>
+<li class="con">Producer manually merges each class</li>
+</ul>
+</div>
+<div class="opt-card github">
+<div class="opt-badge">⚡ Option 2 — More Powerful</div>
+<h3>GitHub via Browser</h3>
+<p>Free accounts at github.com. Works entirely in a browser. Gives you a real version history and looks great on a portfolio.</p>
+<ul class="opt-checks">
+<li class="pro">Full version history — undo anything</li>
+<li class="pro">Every change has an author and message</li>
+<li class="pro">Real developer skill for your portfolio</li>
+<li class="con">Students need a free GitHub account</li>
+<li class="con">A few extra clicks per class</li>
+</ul>
+</div>
+</div>
+
+<!-- ── OPTION 1: GOOGLE DRIVE ─────────────────────────────── -->
+<div style="background:#f0fdf4;border:2px solid #86efac;border-radius:16px;padding:22px 22px 18px;margin-bottom:1.75rem">
+<div class="opt-badge drive" style="background:#dcfce7;color:#166534;display:inline-flex;margin-bottom:12px">⭐ Option 1 — Google Drive</div>
+<h3 style="margin:0 0 14px;color:#0f172a">One-Time Setup (Producer does this)</h3>
+<ol class="setup-steps green">
+<li>In Google Drive, create a shared folder called <strong>Team [Name] Game Project</strong></li>
+<li>Inside it, create a folder called <strong>MAIN</strong> and one folder per person: <strong>Alex-files</strong>, <strong>Sara-files</strong>, etc.</li>
+<li>Right-click the top folder → Share → add all teammates as <strong>Editor</strong></li>
+<li>Each teammate opens the shared folder on their school computer and <strong>downloads the MAIN folder</strong> to start their local copy of the project</li>
+</ol>
+
+<p class="flow-label">Daily flow — every class</p>
+<div class="flow-row">
+<div class="fbox" style="background:#dcfce7">
+<div class="fnum" style="background:#16a34a;color:#fff">1</div>
+<span class="ftitle">🌅 Start of Class</span>
+<span class="fdesc">Open Drive → MAIN folder. Download any files that are newer than yours. Drag them into your local Godot project to replace the old versions.</span>
+</div>
+<div class="farrow">▶</div>
+<div class="fbox" style="background:#f0fdf4">
+<div class="fnum" style="background:#15803d;color:#fff">2</div>
+<span class="ftitle">💻 Work Time</span>
+<span class="fdesc">Open Godot and work normally. Only touch <strong>your assigned files</strong>. If you need something from another person's scene, ask them — don't open the file yourself.</span>
+</div>
+<div class="farrow">▶</div>
+<div class="fbox" style="background:#dcfce7">
+<div class="fnum" style="background:#166534;color:#fff">3</div>
+<span class="ftitle">🏁 End of Class</span>
+<span class="fdesc">Upload your changed files to <strong>your personal folder</strong> in Drive (not MAIN). The Producer downloads everyone's uploads and copies them into MAIN before next class.</span>
+</div>
+</div>
+
+<div class="callout check" style="margin-top:1rem;margin-bottom:0">
+<div class="callout-label">Producer's merge job (5 minutes)</div>
+<p>At the start of each class, before anyone else pulls: open each teammate's personal folder → download their latest files → copy them into MAIN. That's the merge. It's simple because each person only changed their own files — nothing overlaps.</p>
+</div>
+</div>
+
+<!-- ── OPTION 2: GITHUB BROWSER ──────────────────────────── -->
+<div style="background:#eff6ff;border:2px solid #93c5fd;border-radius:16px;padding:22px 22px 18px;margin-bottom:1.75rem">
+<div class="opt-badge github" style="background:#dbeafe;color:#1e3a8a;display:inline-flex;margin-bottom:12px">⚡ Option 2 — GitHub via Browser</div>
+<h3 style="margin:0 0 14px;color:#0f172a">One-Time Setup (Producer does this)</h3>
+<ol class="setup-steps blue">
+<li>Create a free account at <strong>github.com</strong></li>
+<li>Click <strong>New repository</strong> → name it after the game → set to <strong>Private</strong> → check <strong>Add .gitignore</strong> → choose the <strong>Godot</strong> template → click <strong>Create repository</strong></li>
+<li>Go to <strong>Settings → Collaborators</strong> → Invite teammates by email. They accept the invite and create their own free GitHub accounts.</li>
+<li>Click the green <strong>Code</strong> button → <strong>Download ZIP</strong> → extract it → this is your local Godot project folder. Open Godot → Open Project → point to that folder.</li>
+<li>Teammates do the same: go to the repo URL → Code → Download ZIP → extract → open in Godot.</li>
+</ol>
+
+<p class="flow-label">Daily flow — every class</p>
+<div class="flow-row">
+<div class="fbox" style="background:#dbeafe">
+<div class="fnum" style="background:#2563eb;color:#fff">1</div>
+<span class="ftitle">🌅 Start of Class</span>
+<span class="fdesc">Go to <strong>github.com/[your-repo]</strong> → green <strong>Code</strong> button → <strong>Download ZIP</strong> → extract it → open that folder in Godot (replaces yesterday's copy).</span>
+</div>
+<div class="farrow">▶</div>
+<div class="fbox" style="background:#eff6ff">
+<div class="fnum" style="background:#1d4ed8;color:#fff">2</div>
+<span class="ftitle">💻 Work Time</span>
+<span class="fdesc">Open Godot and work normally. Only touch <strong>your assigned files</strong>. If you need something from another person's scene, ask them — don't open the file yourself.</span>
+</div>
+<div class="farrow">▶</div>
+<div class="fbox" style="background:#dbeafe">
+<div class="fnum" style="background:#1e40af;color:#fff">3</div>
+<span class="ftitle">🏁 End of Class</span>
+<span class="fdesc">On github.com, navigate to your file → click <strong>Add file → Upload files</strong> → drag your changed files in → write a short message like <span class="fcode">Added jump SFX</span> → click <strong>Commit changes</strong>.</span>
+</div>
+</div>
+
+<div class="callout why" style="margin-top:1rem;margin-bottom:0">
+<div class="callout-label">What the commit message is for</div>
+<p>Every upload to GitHub gets a short message and a timestamp. This creates a complete history of the project — you can see exactly what changed each class, who changed it, and roll back to any previous version if something breaks. This is exactly how professional game studios work.</p>
+</div>
+</div>
+
+<!-- ── FILE CONFLICT RULE ─────────────────────────────────── -->
+<div class="callout warn">
+<div class="callout-label">What to do if two people accidentally edit the same file</div>
+<p>Stop before uploading. Compare the two versions side by side. Decide together which one to keep, or copy the best parts of each into one file. Then one person uploads the merged version. This is rare if everyone follows the file ownership rule — but it can happen during setup week before roles are fully locked in.</p>
+</div>
+
+<div class="callout check">
+<div class="callout-label">Which option should your team use?</div>
+<p><strong>Start with Option 1 (Drive)</strong> if your team is new to collaborative development — it has zero friction and you'll spend zero class time on setup. Switch to <strong>Option 2 (GitHub)</strong> if your team wants the version history or wants a professional portfolio piece. Both are valid for CP12. Solo students do not need either — your files only live on your machine.</p>
+</div>
+
+</section>
+<!-- end collab -->
+
+<!-- ======================================================
+         GOOGLE SITE
+         ====================================================== -->
+<section class="section" id="section-site">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 2
+      </span>
+<h1>
+       Google Site Portfolio
+      </h1>
+<p class="page-subtitle">
+       Your team must publish a Google Site and submit the URL to the class tracker.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         3.2
+        </span>
+        - create a user interface using effective design principles
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - create documentation associated with the project
+       </li>
+<li>
+<span class="outcome-code">
+         4.8
+        </span>
+        - present the solution
+       </li>
+</ul>
+</div>
+<h2>
+      Required Site Pages
+     </h2>
+<div class="studio-grid">
+<div class="studio-card">
+<strong>
+        Home / Pitch
+       </strong>
+<p>
+        Game title, one-sentence pitch, team members, track, target audience, and one screenshot or concept image.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Project Plan
+       </strong>
+<p>
+        Approved proposal, team roles, MVG features, stretch goals, timeline, and current sprint goal.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Daily Dev Logs
+       </strong>
+<p>
+        Every class entry for every student. This can be embedded from Google Sheets or written as dated posts.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Build Evidence
+       </strong>
+<p>
+        Screenshots, short clips, code snippets, test results, bugs fixed, and playable build notes.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        AI + Resource Log
+       </strong>
+<p>
+        Prompts, AI summaries, accepted/rejected code, Godot docs/manual/ebook pages used, and tutorial links.
+       </p>
+</div>
+<div class="studio-card">
+<strong>
+        Final Reflection
+       </strong>
+<p>
+        What changed from the plan, what each student contributed, what was learned, and what would be improved next.
+       </p>
+</div>
+</div>
+<h2>
+      Publishing Requirement
+     </h2>
+<ol>
+<li>
+       Create a Google Site for your team.
+      </li>
+<li>
+       Publish it using a clear name such as
+       <code>
+        cp12-team-3-sky-runner
+       </code>
+       .
+      </li>
+<li>
+       Set sharing so the teacher can open it without requesting access.
+      </li>
+<li>
+       Paste the published URL into the class tracking sheet.
+      </li>
+<li>
+       Keep the site updated every class. A beautiful final site with no daily evidence does not count as complete documentation.
+      </li>
+</ol>
+<div class="callout check">
+<div class="callout-label">
+       Google Site checkpoint
+      </div>
+<ul>
+<li>
+        Published URL opens in an incognito/private browser window
+       </li>
+<li>
+        Team members and roles are visible on the Home page
+       </li>
+<li>
+        Daily Dev Logs page exists before build work begins
+       </li>
+<li>
+        AI + Resource Log page exists before AI is used
+       </li>
+<li>
+        Teacher has the URL in the class tracker
+       </li>
+</ul>
+</div>
+</section>
+<!-- end site -->
+<!-- ======================================================
+         DAILY LOGS
+         ====================================================== -->
+<section class="section" id="section-logs">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 3
+      </span>
+<h1>
+       Daily Dev Logs
+      </h1>
+<p class="page-subtitle">
+       The daily log is your proof of process. It protects honest work and makes AI use visible.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         2.6
+        </span>
+        - evaluate programs and documentation
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - document the project
+       </li>
+<li>
+<span class="outcome-code">
+         4.7
+        </span>
+        - test and refine the solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.9
+        </span>
+        - reflect on learning and process
+       </li>
+</ul>
+</div>
+<h2>
+      Every Student, Every Class
+     </h2>
+<p>
+      Each student completes one dev-log entry before leaving class. Teams may discuss the entry, but each student writes their own. You submit through the class Daily Dev Log form — the teacher will share the link with you on day one.
+     </p>
+<div class="callout godot">
+<div class="callout-label">
+       How the automated system works
+      </div>
+<p>
+       <strong>1. Teacher shares the form link</strong> — bookmark it or find it on your class page.<br/>
+       <strong>2. You fill in the form</strong> before leaving class each day (about 5 minutes).<br/>
+       <strong>3. Your submission auto-updates the Class Tracker</strong> — Today Log Status changes to Complete, AI Log Status updates automatically based on your answer, and if you report no blocker the tracker clears it.<br/>
+       <strong>4. Your responses appear in the Dev Log Responses tab</strong> inside the Class Tracker spreadsheet — your teacher can see every entry.<br/>
+       <strong>5. Link or embed your responses on your Google Site</strong> — go to Daily Dev Logs page on your Site and embed the response spreadsheet so it stays current.
+      </p>
+</div>
+<div class="template-box">
+<h3>
+       Daily Dev Log Prompt
+      </h3>
+<ol>
+<li>
+        What did I work on today?
+       </li>
+<li>
+        What changed in the game, site, art, level, sound, or code?
+       </li>
+<li>
+        What evidence did I create today? Link a screenshot, code snippet, commit, or site update.
+       </li>
+<li>
+        What problem or blocker did I hit?
+       </li>
+<li>
+        How did I try to solve it?
+       </li>
+<li>
+        Did I use AI today? If yes, paste the prompt or summarize the exact help.
+       </li>
+<li>
+        What is my next task?
+       </li>
+<li>
+        Confidence check: green, yellow, or red?
+       </li>
+</ol>
+</div>
+<h2>
+      Class Tracker
+     </h2>
+<p>
+      The Class Tracker is a Google Sheet your teacher maintains. The automated system updates three columns every time you submit your form — you do not need to edit the tracker directly. Your teacher manages the remaining columns.
+     </p>
+<table class="scope-table">
+<thead>
+<tr>
+<th>Column</th>
+<th>Purpose</th>
+<th>Who updates it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Team # / Team Name</td>
+<td>Identify the team quickly</td>
+<td>Teacher (setup)</td>
+</tr>
+<tr>
+<td>Members</td>
+<td>Who is on the team</td>
+<td>Teacher (setup)</td>
+</tr>
+<tr>
+<td>Track</td>
+<td>2D, 3D, Open Concept, Solo Approved</td>
+<td>Teacher (setup)</td>
+</tr>
+<tr>
+<td>Google Site URL</td>
+<td>Links to the published portfolio site</td>
+<td>Teacher (once per team)</td>
+</tr>
+<tr>
+<td style="color:var(--green);font-weight:700">Today Log Status ✦</td>
+<td><strong>Auto-updated</strong> — set to Complete when any team member submits the form</td>
+<td>Automated (form trigger)</td>
+</tr>
+<tr>
+<td style="color:var(--green);font-weight:700">AI Log Status ✦</td>
+<td><strong>Auto-updated</strong> — Logged if student reported AI use, No AI otherwise</td>
+<td>Automated (form trigger)</td>
+</tr>
+<tr>
+<td style="color:var(--green);font-weight:700">Current Blocker ✦</td>
+<td><strong>Auto-cleared</strong> to None if student reports no blocker. Teacher sets the category type.</td>
+<td>Automated + Teacher</td>
+</tr>
+<tr>
+<td>Current Sprint Goal</td>
+<td>What the team is building this sprint</td>
+<td>Teacher (daily)</td>
+</tr>
+<tr>
+<td>Build Status</td>
+<td>Planning → Prototype → Playable → Testing → Demo Ready</td>
+<td>Teacher (when milestone hit)</td>
+</tr>
+<tr>
+<td>Teacher Check-In</td>
+<td>Needs Follow-Up flags a team for a check-in conversation</td>
+<td>Teacher</td>
+</tr>
+</tbody>
+</table>
+<div class="callout godot">
+<div class="callout-label">
+       Why this matters
+      </div>
+<p>
+       The tracker gives the teacher a live map of who needs help, who is blocked, who is using AI responsibly, and who has not submitted evidence today — all in one view. The teacher dashboard (web app) reads from this tracker to show color-coded team cards. That means your form submission directly changes what your teacher sees on their screen.
+      </p>
+</div>
+</section>
+<!-- end logs -->
+<!-- ======================================================
+         AI RULES
+         ====================================================== -->
+<section class="section" id="section-ai">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · AI Policy
+      </span>
+<h1>
+       AI + Resource Rules
+      </h1>
+<p class="page-subtitle">
+       AI is allowed as a learning assistant, not as a hidden teammate.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         1.6
+        </span>
+        - consider ethical, moral, and legal issues in IT
+       </li>
+<li>
+<span class="outcome-code">
+         2.6
+        </span>
+        - evaluate other people’s programs and documentation
+       </li>
+<li>
+<span class="outcome-code">
+         4.4
+        </span>
+        - locate, evaluate, and select resources
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - document resource and AI use
+       </li>
+</ul>
+</div>
+<h2>
+      Allowed Tools
+     </h2>
+<ul>
+<li>
+       Gemini Godot Buddy with approved Godot resources, the manual, and teacher-provided materials
+      </li>
+<li>
+       Godot manual and official docs
+      </li>
+<li>
+       Approved Godot ebooks and course materials
+      </li>
+<li>
+       Claude, ChatGPT, or similar AI tools during class time only, if logged
+      </li>
+<li>
+       Teacher-approved tutorials, videos, and examples
+      </li>
+<li>
+       Free resource libraries listed on the
+       <a data-section="resources" href="#">
+        Free Resources page
+       </a>
+       , after checking license, suitability, and attribution requirements
+      </li>
+</ul>
+<div class="callout warn">
+<div class="callout-label">
+       AI use rule
+      </div>
+<p>
+       You may use AI to explain, debug, suggest approaches, generate examples, or help with wording. You may not submit AI-generated code that you cannot explain. If you cannot answer questions about the code, it does not count as your work.
+      </p>
+</div>
+<h2>
+      AI Log Requirements
+     </h2>
+<p>
+      Every AI use entry must include:
+     </p>
+<ol>
+<li>
+       The tool used
+      </li>
+<li>
+       The prompt or a clear summary of the prompt
+      </li>
+<li>
+       What the AI suggested
+      </li>
+<li>
+       What you accepted, changed, or rejected
+      </li>
+<li>
+       How you tested it
+      </li>
+<li>
+       What you now understand better
+      </li>
+</ol>
+<div class="template-box">
+<h3>
+       Good AI Prompt Pattern
+      </h3>
+<p>
+<code>
+        I am a beginner Godot 4 student. My team is building a small 2D platformer. Explain how to make an Area2D spike damage a CharacterBody2D player. Use simple GDScript and explain each line. Do not add extra systems beyond health, damage, and invincibility.
+       </code>
+</p>
+</div>
+<div class="template-box">
+<h3>
+       Debug Prompt Pattern
+      </h3>
+<p>
+<code>
+        Here is my Godot error and my script. Help me understand what the error means. Ask me one question if you need more context. Do not rewrite the whole script; show the smallest fix and explain why it works.
+       </code>
+</p>
+</div>
+<h2>
+      Resource Evaluation
+     </h2>
+<p>
+      When using a book, manual page, tutorial, or AI answer, students should ask:
+     </p>
+<ul>
+<li>
+       Is this for Godot 4, not Godot 3?
+      </li>
+<li>
+       Does this match my node type: 2D vs 3D, Area vs Body, Control vs Node2D?
+      </li>
+<li>
+       Can I explain the code in my own words?
+      </li>
+<li>
+       Did I test it in my project?
+      </li>
+<li>
+       Did I record the source in my Google Site?
+      </li>
+</ul>
+</section>
+<!-- end ai -->
+<!-- ======================================================
+         TRACK SELECTION
+         ====================================================== -->
+<section class="section" id="section-resources">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Resources
+      </span>
+<h1>
+       Free Godot + Game Asset Resources
+      </h1>
+<p class="page-subtitle">
+       Use free, legal, school-appropriate resources. Every asset, tutorial, and AI suggestion must be logged on your Google Site.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         1.6
+        </span>
+        - use resources legally and ethically
+       </li>
+<li>
+<span class="outcome-code">
+         2.6
+        </span>
+        - evaluate outside code, tutorials, and documentation
+       </li>
+<li>
+<span class="outcome-code">
+         4.4
+        </span>
+        - locate, evaluate, and select resources
+       </li>
+</ul>
+</div>
+<h2>
+      Student Resource Rules
+     </h2>
+<div class="callout warn">
+<div class="callout-label">
+       License and suitability check
+      </div>
+<p>
+       Free does not always mean free to publish or remix. Before using an asset, check the license, write down the source link, record whether attribution is required, and make sure the content is appropriate for school use.
+      </p>
+</div>
+<h2>
+      Recommended Free Links
+     </h2>
+<div class="studio-grid resource-list">
+<div class="studio-card">
+<strong>
+        Godot Official Documentation
+       </strong>
+<p>
+        Best first stop for Godot 4 nodes, scenes, scripting, input, signals, 2D, 3D, and UI questions.
+       </p>
+<p>
+<a href="https://docs.godotengine.org/en/stable/" rel="noopener" target="_blank">
+         Open Godot Docs
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Godot Step-by-Step Lessons
+       </strong>
+<p>
+        Beginner-friendly reference for nodes, scenes, scripting, player input, and signals.
+       </p>
+<p>
+<a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/" rel="noopener" target="_blank">
+         Open Step-by-Step Lessons
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Godot Asset Library
+       </strong>
+<p>
+        Godot-specific add-ons, scripts, tools, demos, and resources. Check compatibility with Godot 4 before installing.
+       </p>
+<p>
+<a href="https://godotengine.org/asset-library/" rel="noopener" target="_blank">
+         Open Godot Asset Library
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Kenney Assets
+       </strong>
+<p>
+        Excellent school-friendly 2D, 3D, UI, and audio packs for small game projects.
+       </p>
+<p>
+<a href="https://kenney.nl/assets" rel="noopener" target="_blank">
+         Open Kenney Assets
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        itch.io Free Game Assets
+       </strong>
+<p>
+        Large marketplace of free and paid assets. Use filters carefully and always check the asset license.
+       </p>
+<p>
+<a href="https://itch.io/game-assets/free" rel="noopener" target="_blank">
+         Open itch.io Free Assets
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        OpenGameArt
+       </strong>
+<p>
+        2D art, 3D art, textures, music, and sound effects. License terms vary, so attribution notes are required.
+       </p>
+<p>
+<a href="https://opengameart.org/" rel="noopener" target="_blank">
+         Open OpenGameArt
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Freesound
+       </strong>
+<p>
+        Creative Commons sound effects. Filter by license and keep attribution notes in the Resource Log.
+       </p>
+<p>
+<a href="https://freesound.org/browse/" rel="noopener" target="_blank">
+         Open Freesound
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Pixabay Sound Effects
+       </strong>
+<p>
+        Simple source for sound effects. Still log the source link and verify the license page before using.
+       </p>
+<p>
+<a href="https://pixabay.com/sound-effects/" rel="noopener" target="_blank">
+         Open Pixabay Sound Effects
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        Poly Haven
+       </strong>
+<p>
+        Free 3D models, HDRIs, and textures, useful for 3D exploration games and environments.
+       </p>
+<p>
+<a href="https://polyhaven.com/" rel="noopener" target="_blank">
+         Open Poly Haven
+        </a>
+</p>
+</div>
+<div class="studio-card">
+<strong>
+        ambientCG
+       </strong>
+<p>
+        Free PBR materials, HDRIs, and 3D resources for environment building and 3D materials.
+       </p>
+<p>
+<a href="https://ambientcg.com/" rel="noopener" target="_blank">
+         Open ambientCG
+        </a>
+</p>
+</div>
+</div>
+<h2>
+      Resource Log Minimum
+     </h2>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         What to record
+        </th>
+<th>
+         Example
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Resource name and link
+        </td>
+<td>
+         Kenney Platformer Pack — URL pasted in log
+        </td>
+</tr>
+<tr>
+<td>
+         Type
+        </td>
+<td>
+         2D sprite, 3D model, sound effect, tutorial, documentation, AI explanation
+        </td>
+</tr>
+<tr>
+<td>
+         License / attribution
+        </td>
+<td>
+         CC0, attribution required, classroom-only, or teacher-approved use
+        </td>
+</tr>
+<tr>
+<td>
+         How it was used
+        </td>
+<td>
+         Player sprite, tile set, pickup sound, UI button, movement tutorial
+        </td>
+</tr>
+<tr>
+<td>
+         What your team changed
+        </td>
+<td>
+         Edited colour, resized sprite, changed code, compressed audio, rejected AI suggestion
+        </td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="section" id="section-tracks">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 4
+      </span>
+<h1>
+       Choose Your Track
+      </h1>
+<p class="page-subtitle">
+       Three paths, all valid. Pick the one that matches what you want to build and what you have already learned.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         1.4
+        </span>
+        - identify strategies to solve a range of problems
+       </li>
+<li>
+<span class="outcome-code">
+         2.4
+        </span>
+        - use appropriate methods and terms to plan a solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.1
+        </span>
+        - analyze the problem
+       </li>
+<li>
+<span class="outcome-code">
+         4.2
+        </span>
+        - define scope before building
+       </li>
+</ul>
+</div>
+<h2>
+      The Three Tracks
+     </h2>
+<div class="track-grid">
+<div class="track-card track-2d">
+<h3 class="t2d">
+        Track A — 2D Platformer
+       </h3>
+<p>
+        Extend your PL1–PL3 foundation into a complete level-based platformer.
+       </p>
+<ul>
+<li>
+         Multiple connected levels or one large scrolling level
+        </li>
+<li>
+         Animated player with at least 3 animation states
+        </li>
+<li>
+         At least one type of hazard (spike, enemy, pit)
+        </li>
+<li>
+         Collectibles with a score or progress counter
+        </li>
+<li>
+         Win / lose condition
+        </li>
+</ul>
+</div>
+<div class="track-card track-3d">
+<h3 class="t3d">
+        Track B — 3D Exploration
+       </h3>
+<p>
+        Extend your 3D1–3D3 foundation into a collectathon or exploration game.
+       </p>
+<ul>
+<li>
+         3D environment with distinct areas or rooms
+        </li>
+<li>
+         CharacterBody3D player with full movement and jump
+        </li>
+<li>
+         Multiple pickup types or objectives
+        </li>
+<li>
+         At least one interactive element (door, enemy, switch)
+        </li>
+<li>
+         Win / lose or end-state condition
+        </li>
+</ul>
+</div>
+<div class="track-card track-open" style="grid-column: 1 / -1;">
+<h3 class="topen">
+        Track C — Open Concept
+       </h3>
+<p>
+        Design something outside the platformer/exploration box — with teacher approval.
+       </p>
+<ul>
+<li>
+         Examples: top-down shooter, puzzle game, tower defence, rhythm game, racing game
+        </li>
+<li>
+         Must use Godot 4 and at least two of: physics bodies, signals, timers, UI, scenes
+        </li>
+<li>
+         Must have a clear player action, consequence, and win/lose state
+        </li>
+<li>
+         Scope must be approved before you start building — book a teacher check-in
+        </li>
+</ul>
+</div>
+</div>
+<div class="callout next">
+<div class="callout-label">
+       Next step
+      </div>
+<p>
+       Once your team has chosen a track, open the
+       <a href="https://docs.google.com/document/d/1bm-wXMLSOdGR_Bn9Qi6ioLSiJUqFXFsOaAbjZS1LKlI/edit?usp=sharing">
+        proposal DOCX template
+       </a>
+       , complete it as a team, and get teacher approval before serious build work begins.
+      </p>
+</div>
+</section>
+<!-- end tracks -->
+<!-- ======================================================
+         DESIGN PROPOSAL
+         ====================================================== -->
+<section class="section" id="section-proposal">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 5
+      </span>
+<h1>
+       Team Design Proposal
+      </h1>
+<p class="page-subtitle">
+       Write your team plan before you build it: game idea, roles, resources, scope, risks, and daily evidence plan.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         1.3
+        </span>
+        - define a problem using object-oriented analysis
+       </li>
+<li>
+<span class="outcome-code">
+         2.4
+        </span>
+        - develop a plan to solve a problem
+       </li>
+<li>
+<span class="outcome-code">
+         4.1
+        </span>
+        - analyze a problem
+       </li>
+<li>
+<span class="outcome-code">
+         4.2
+        </span>
+        - develop a project plan
+       </li>
+<li>
+<span class="outcome-code">
+         4.4
+        </span>
+        - identify information needs and select resources
+       </li>
+</ul>
+</div>
+<h2>
+      Proposal DOCX Template
+     </h2>
+<div class="download-card">
+<h3>
+       Download and complete the team proposal
+      </h3>
+<p>
+       The proposal is now a separate Word document so your team can complete it, submit it, and link the final approved version from your Google Site.
+      </p>
+<a class="download-button" href="https://docs.google.com/document/d/1bm-wXMLSOdGR_Bn9Qi6ioLSiJUqFXFsOaAbjZS1LKlI/edit?usp=sharing">
+       Download Proposal DOCX
+      </a>
+<p class="resource-note">
+       Website setup note: upload the DOCX to the same folder/site location as this HTML or upload it to Google Drive and replace this link with the share URL.
+      </p>
+</div>
+<h2>
+      What the proposal must include
+     </h2>
+<ol>
+<li>
+       Team name, team members, roles, and published Google Site URL
+      </li>
+<li>
+       Chosen track: 2D Platformer, 3D Exploration, Open Concept, or Solo Approved
+      </li>
+<li>
+       Game title, one-sentence pitch, player action, win condition, and lose condition
+      </li>
+<li>
+       Three Minimum Viable Game features plus one optional stretch goal
+      </li>
+<li>
+       Resources, documentation links, Godot references, and approved AI support plan
+      </li>
+<li>
+       Biggest risk or uncertainty, daily evidence plan, and teacher approval signature
+      </li>
+</ol>
+<div class="callout check">
+<div class="callout-label">
+       Before coding begins
+      </div>
+<p>
+       The proposal must be complete, realistic, and approved. A team that starts coding before defining scope usually loses time rebuilding later.
+      </p>
+</div>
+<h2>
+      How to link it on your Google Site
+     </h2>
+<ol>
+<li>
+       Make a copy of the DOCX or convert it to a Google Doc if your team wants to edit together.
+      </li>
+<li>
+       Complete the proposal and get teacher approval.
+      </li>
+<li>
+       Upload or link the approved proposal on the Project Plan page of your Google Site.
+      </li>
+<li>
+       Keep the proposal visible even if the project changes; explain changes in the Daily Dev Logs and Final Reflection.
+      </li>
+</ol>
+<div class="callout next">
+<div class="callout-label">
+       Next step — Scope Calibration
+      </div>
+<p>
+       After the proposal is approved, use the Scope Calibration section to check that your three required features are realistic for the time available.
+      </p>
+</div>
+</section>
+<!-- end proposal -->
+<!-- ======================================================
+         SCOPE CALIBRATION
+         ====================================================== -->
+<section class="section" id="section-scope">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 6
+      </span>
+<h1>
+       Scope Calibration
+      </h1>
+<p class="page-subtitle">
+       Reality-check your plan. Most first capstone ideas are 5× too big. This page helps you right-size the work.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         1.5
+        </span>
+        - apply problem-solving skills
+       </li>
+<li>
+<span class="outcome-code">
+         4.1
+        </span>
+        - analyze the problem
+       </li>
+<li>
+<span class="outcome-code">
+         4.2
+        </span>
+        - manage project scope
+       </li>
+<li>
+<span class="outcome-code">
+         4.5
+        </span>
+        - build and deploy a solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.7
+        </span>
+        - test and refine the solution
+       </li>
+</ul>
+</div>
+<h2>
+      Minimum Project Requirements
+     </h2>
+<p>
+      Every submission — regardless of track, team size, or demo format — must meet all of the following. A project missing any item is incomplete and cannot receive a passing grade, no matter how polished the rest is.
+     </p>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Requirement
+        </th>
+<th>
+         Why it cannot be skipped
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+          Player movement with physics
+         </strong>
+         — CharacterBody2D or 3D, gravity,
+         <code>
+          is_on_floor()
+         </code>
+         ,
+         <code>
+          move_and_slide()
+         </code>
+</td>
+<td>
+         The foundation of any Godot game. A project without it has not applied the core course skills.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          At least one interactive mechanic
+         </strong>
+         — pickup, hazard, enemy, or door using Area2D/3D and signals
+        </td>
+<td>
+         Requires demonstrating signals, node communication, and
+         <code>
+          queue_free()
+         </code>
+         — essential CP12 outcomes.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          Score or health tracked in a variable and displayed on a HUD
+         </strong>
+         — CanvasLayer + Label + script
+        </td>
+<td>
+         Proves the student can connect game state to a UI element — a distinct CP12 programming requirement.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          A working win condition AND a working lose condition
+         </strong>
+</td>
+<td>
+         Without both, the game loop is incomplete. A game that only ends one way is not finished.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          At least 2 scenes
+         </strong>
+         — one gameplay scene plus a win/lose screen or title screen with a scene transition
+        </td>
+<td>
+         Proves the student can manage multiple scenes and use
+         <code>
+          change_scene_to_file()
+         </code>
+         .
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          Daily dev log entries for every project class session
+         </strong>
+</td>
+<td>
+         The timestamped evidence trail. Thin or missing logs indicate the work happened in a rush, not over time.
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          Each student can explain their required script line by line
+         </strong>
+</td>
+<td>
+         The CP12 programming outcomes gate. A student who cannot explain their code cannot score above Level 2.
+        </td>
+</tr>
+</tbody>
+</table>
+<div class="callout warn">
+<div class="callout-label">
+       Why these requirements prevent a two-class submission
+      </div>
+<p>
+       A student who genuinely implements player physics, an interactive mechanic, a HUD, win and lose conditions, and a scene transition — with a daily log entry for every class — has done roughly 8–12 hours of focused Godot work. That cannot be faked in two classes. The logs are your strongest protection: if entries are thin for the first three weeks and everything appears in the final week, that pattern is the conversation.
+      </p>
+</div>
+<div class="callout warn">
+<div class="callout-label">
+       The #1 capstone failure mode
+      </div>
+<p>
+       A student spends 80% of the project time on one complex feature — custom AI, procedural generation, an inventory system. The core game loop never gets built. A simple, complete, playable game earns a higher grade than an ambitious, half-finished one every time.
+      </p>
+</div>
+<h2>
+      Feature Size Guide
+     </h2>
+<p>
+      Use this table to estimate how long features take. One class period ≈ 60 minutes of focused work.
+     </p>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Feature
+        </th>
+<th>
+         Realistic time
+        </th>
+<th>
+         Verdict
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Player movement (from warm-up template)
+        </td>
+<td>
+         30–60 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Static hazards (spikes, pits)
+        </td>
+<td>
+         30–45 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Simple pickup + score counter
+        </td>
+<td>
+         45–60 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         TileMap level (one room)
+        </td>
+<td>
+         60–90 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Sprite animation (3 states)
+        </td>
+<td>
+         60–120 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Simple patrol enemy (back and forth)
+        </td>
+<td>
+         60–90 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Win/lose screen (simple Label)
+        </td>
+<td>
+         30–45 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Multiple levels with scene transitions
+        </td>
+<td>
+         90–150 min
+        </td>
+<td class="warn-scope">
+         ⚠ Stretch
+        </td>
+</tr>
+<tr>
+<td>
+         Moving platforms (AnimatableBody)
+        </td>
+<td>
+         90–120 min
+        </td>
+<td class="warn-scope">
+         ⚠ Stretch
+        </td>
+</tr>
+<tr>
+<td>
+         Sound effects + music
+        </td>
+<td>
+         45–90 min
+        </td>
+<td class="warn-scope">
+         ⚠ Stretch
+        </td>
+</tr>
+<tr>
+<td>
+         Main menu + pause screen
+        </td>
+<td>
+         60–90 min
+        </td>
+<td class="warn-scope">
+         ⚠ Stretch
+        </td>
+</tr>
+<tr>
+<td>
+         Chase enemy with pathfinding (NavAgent)
+        </td>
+<td>
+         120–180 min
+        </td>
+<td class="warn-scope">
+         ⚠ Stretch
+        </td>
+</tr>
+<tr>
+<td>
+         Inventory system
+        </td>
+<td>
+         3–5 hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+<tr>
+<td>
+         Dialogue system
+        </td>
+<td>
+         3–6 hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+<tr>
+<td>
+         Procedural level generation
+        </td>
+<td>
+         5–15 hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+<tr>
+<td>
+         Multiplayer
+        </td>
+<td>
+         20+ hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+<tr>
+<td>
+         Save/load system
+        </td>
+<td>
+         3–5 hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+<tr>
+<td>
+         Full RPG stat system
+        </td>
+<td>
+         10–30 hours
+        </td>
+<td class="no">
+         ✗ Out of scope
+        </td>
+</tr>
+</tbody>
+</table>
+<h2>
+      The Minimum Viable Game (MVG) Test
+     </h2>
+<p>
+      Before adding any feature, ask:
+      <strong>
+       "Is this the game without it?"
+      </strong>
+</p>
+<ul>
+<li>
+       Without player movement — not a game.
+       <strong>
+        Required.
+       </strong>
+</li>
+<li>
+       Without a win/lose condition — not a game.
+       <strong>
+        Required.
+       </strong>
+</li>
+<li>
+       Without sprite animation — still a game (colored rectangle works).
+       <strong>
+        Nice to have.
+       </strong>
+</li>
+<li>
+       Without a main menu — still a game.
+       <strong>
+        Polish.
+       </strong>
+</li>
+<li>
+       Without sound — still a game.
+       <strong>
+        Polish.
+       </strong>
+</li>
+</ul>
+<div class="callout godot">
+<div class="callout-label">
+       The "build in order" rule
+      </div>
+<p>
+       Always build in this order: (1) Player can move, (2) Player can die / lose, (3) Player can win, (4) The whole loop works start to finish. Only then add anything else. If you add art before the loop works, you have a pretty demo that is not a game.
+      </p>
+</div>
+<h2>
+      Scope Reduction Checklist
+     </h2>
+<p>
+      If your proposal has features in the "Out of scope" or multiple "Stretch" rows, use these cuts:
+     </p>
+<ul>
+<li>
+<strong>
+        Dialogue → description label.
+       </strong>
+       Instead of a dialogue system, use a static Label node that shows a message when the player enters an Area.
+      </li>
+<li>
+<strong>
+        Multiple levels → one long level.
+       </strong>
+       One large scrolling TileMap takes a fraction of the time of a multi-scene level system.
+      </li>
+<li>
+<strong>
+        Procedural → hand-crafted.
+       </strong>
+       Paint your level by hand. It is faster, more controllable, and you know it works.
+      </li>
+<li>
+<strong>
+        Complex enemy AI → patrol or static.
+       </strong>
+       A back-and-forth patrol is fully satisfying as a hazard. Chase AI is a stretch goal.
+      </li>
+<li>
+<strong>
+        Inventory → score counter.
+       </strong>
+       A simple integer score variable replaces 80% of what an inventory does for gameplay feel.
+      </li>
+</ul>
+<div class="callout check">
+<div class="callout-label">
+       Scope self-check — do this before starting to build
+      </div>
+<ul>
+<li>
+        Each of my three required features is in the "Core" row of the table above
+       </li>
+<li>
+        I can explain exactly how I will implement each feature (which nodes, which scripts)
+       </li>
+<li>
+        I could build a rough version of each feature in one class period if I had to
+       </li>
+<li>
+        My stretch goal is clearly marked and I will not start it until the core is done and tested
+       </li>
+</ul>
+</div>
+</section>
+<!-- end scope -->
+<!-- ======================================================
+         PRESENTATION
+         ====================================================== -->
+<section class="section" id="section-presentation">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 7
+      </span>
+<h1>
+       Game Jam Presentation
+      </h1>
+<p class="page-subtitle">
+       Demo the game, explain the process, and defend the code you submitted.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         3.3
+        </span>
+        - apply input/output operations
+       </li>
+<li>
+<span class="outcome-code">
+         3.6
+        </span>
+        - apply error-handling techniques/validation
+       </li>
+<li>
+<span class="outcome-code">
+         4.8
+        </span>
+        - present the solution
+       </li>
+<li>
+<span class="outcome-code">
+         4.9
+        </span>
+        - reflect on the solution and learning
+       </li>
+</ul>
+</div>
+<h2>
+      Choose Your Demo Format
+     </h2>
+<p>
+      Two formats are accepted. Both demonstrate the same competencies — choose the one that works best for you. Declare your format when you submit your proposal so your teacher knows what to expect.
+     </p>
+<div class="track-grid">
+<div class="track-card track-2d">
+<h3 class="t2d">
+        Option A — Live Demo
+       </h3>
+<p>
+        Present in person to the class on demo day. Best for students who are comfortable speaking in front of others.
+       </p>
+<ul>
+<li>
+         Pitch, gameplay demo, process walkthrough, code explanation, Q&amp;A
+        </li>
+<li>
+         8–12 minutes total for the team
+        </li>
+<li>
+         Teacher asks follow-up questions live
+        </li>
+</ul>
+</div>
+<div class="track-card track-3d">
+<h3 class="t3d">
+        Option B — Video Walkthrough
+       </h3>
+<p>
+        Submit a recorded screen walkthrough before demo day. Best for students who communicate more effectively in writing or in a quieter setting.
+       </p>
+<ul>
+<li>
+         5–10 minutes, screen-recorded with your voice narrating
+        </li>
+<li>
+         Must be submitted to the teacher before demo day
+        </li>
+<li>
+         Teacher may ask 1–2 follow-up questions after viewing
+        </li>
+</ul>
+</div>
+</div>
+<h2>
+      Live Demo Format
+     </h2>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Part
+        </th>
+<th>
+         Time
+        </th>
+<th>
+         What to Include
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Pitch
+        </td>
+<td>
+         30 seconds
+        </td>
+<td>
+         Game title, genre, team members, and the one-sentence concept.
+        </td>
+</tr>
+<tr>
+<td>
+         Gameplay Demo
+        </td>
+<td>
+         2–4 minutes
+        </td>
+<td>
+         Show the full loop: start, player action, challenge, win or lose.
+        </td>
+</tr>
+<tr>
+<td>
+         Process Evidence
+        </td>
+<td>
+         1–2 minutes
+        </td>
+<td>
+         Show Google Site, daily logs, one bug fixed, and one design change.
+        </td>
+</tr>
+<tr>
+<td>
+         Code Walkthrough
+        </td>
+<td>
+         2 minutes
+        </td>
+<td>
+         Each student explains one script, signal, node setup, or feature they worked on.
+        </td>
+</tr>
+<tr>
+<td>
+         Q&amp;A
+        </td>
+<td>
+         2–4 minutes
+        </td>
+<td>
+         Teacher/class questions. Every student answers at least one question.
+        </td>
+</tr>
+</tbody>
+</table>
+<h2>
+      Video Walkthrough Requirements
+     </h2>
+<p>
+      A video walkthrough is a full demonstration — not just a gameplay clip. It must include all four of the following sections in order:
+     </p>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Section
+        </th>
+<th>
+         What to record
+        </th>
+<th>
+         Why it is required
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<strong>
+          1. Gameplay run
+         </strong>
+</td>
+<td>
+         Play through the full game loop on camera — start, interact, reach win or lose state. Narrate what the player is doing and why.
+        </td>
+<td>
+         Proves the game works
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          2. Script walkthrough
+         </strong>
+</td>
+<td>
+         Open every script you authored in the Godot editor. Read and explain each section out loud — what it extends, what each variable does, what the key function does.
+        </td>
+<td>
+         Proves you wrote and understand the code
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          3. Code-defense questions
+         </strong>
+</td>
+<td>
+         Answer at least three questions from the Code-Defense list below. Pick one Basic, one Intermediate, and one Advanced. Say the question out loud before answering.
+        </td>
+<td>
+         Satisfies CP12 programming outcomes
+        </td>
+</tr>
+<tr>
+<td>
+<strong>
+          4. Process evidence
+         </strong>
+</td>
+<td>
+         Navigate to your Google Site on screen. Show the Daily Dev Logs page, one screenshot from Build Evidence, and your AI + Resource Log.
+        </td>
+<td>
+         Proves the work happened over time
+        </td>
+</tr>
+</tbody>
+</table>
+<div class="callout godot">
+<div class="callout-label">
+       Video submission checklist
+      </div>
+<ul>
+<li>
+        Screen and voice are both recorded (no silent video)
+       </li>
+<li>
+        All four required sections are present
+       </li>
+<li>
+        Each script you authored is opened and explained on camera
+       </li>
+<li>
+        At least three code-defense questions are answered
+       </li>
+<li>
+        Google Site is shown with logs and evidence visible
+       </li>
+<li>
+        Submitted to Google Drive and link shared with teacher before demo day
+       </li>
+</ul>
+</div>
+<h2>
+      Code-Defense Questions
+     </h2>
+<p>
+      Be ready to answer questions like these. You do not need perfect language, but you do need to show that you understand your own project.
+     </p>
+<div class="studio-grid">
+<div class="studio-card">
+<strong>
+        Node + Scene Questions
+       </strong>
+<ul>
+<li>
+         Why did you use
+         <code>
+          Area2D
+         </code>
+         /
+         <code>
+          Area3D
+         </code>
+         here?
+        </li>
+<li>
+         Where is the player scene instanced?
+        </li>
+<li>
+         What signal is connected, and what function receives it?
+        </li>
+</ul>
+</div>
+<div class="studio-card">
+<strong>
+        Code Questions
+       </strong>
+<ul>
+<li>
+         Where is health, score, or progress stored?
+        </li>
+<li>
+         What does
+         <code>
+          delta
+         </code>
+         do in this script?
+        </li>
+<li>
+         What line actually moves the player or enemy?
+        </li>
+</ul>
+</div>
+<div class="studio-card">
+<strong>
+        Design Questions
+       </strong>
+<ul>
+<li>
+         What value did you tune, and why?
+        </li>
+<li>
+         What changed from the original proposal?
+        </li>
+<li>
+         How did playtesting affect the level or mechanic?
+        </li>
+</ul>
+</div>
+<div class="studio-card">
+<strong>
+        AI + Resource Questions
+       </strong>
+<ul>
+<li>
+         What did AI help with?
+        </li>
+<li>
+         What did you change from the AI suggestion?
+        </li>
+<li>
+         Which Godot docs, book, or tutorial helped most?
+        </li>
+</ul>
+</div>
+</div>
+<h2>
+      Presentation Slide / Site Prompt
+     </h2>
+<div class="template-box">
+<h3>
+       Use this as your final presentation outline
+      </h3>
+<ol>
+<li>
+        Our game is called ___, and the player must ___.
+       </li>
+<li>
+        Our team roles were ___.
+       </li>
+<li>
+        The core loop is ___.
+       </li>
+<li>
+        The hardest technical problem was ___, and we solved it by ___.
+       </li>
+<li>
+        One important design change was ___ because ___.
+       </li>
+<li>
+        We used AI/resources for ___, and we verified the work by ___.
+       </li>
+<li>
+        If we had one more week, we would improve ___.
+       </li>
+</ol>
+</div>
+</section>
+<!-- end presentation -->
+<!-- ======================================================
+         RUBRIC
+         ====================================================== -->
+<section class="section" id="section-rubric">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 8
+      </span>
+<h1>
+       Assessment Rubric
+      </h1>
+<p class="page-subtitle">
+       How your capstone project is evaluated — read this before you start building.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         2.1
+        </span>
+        - understand syntax and language features
+       </li>
+<li>
+<span class="outcome-code">
+         3.1
+        </span>
+        - develop tools, components, and strategies
+       </li>
+<li>
+<span class="outcome-code">
+         4.3
+        </span>
+        - collaborate
+       </li>
+<li>
+<span class="outcome-code">
+         4.5
+        </span>
+        - build and deploy
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - document
+       </li>
+<li>
+<span class="outcome-code">
+         4.7
+        </span>
+        - test and refine
+       </li>
+<li>
+<span class="outcome-code">
+         4.8
+        </span>
+        - present
+       </li>
+<li>
+<span class="outcome-code">
+         4.9
+        </span>
+        - reflect
+       </li>
+</ul>
+</div>
+<div class="callout why">
+<div class="callout-label">
+       How to read this rubric
+      </div>
+<p>
+       This rubric uses the HRCE 4-point scale. Each phase of the capstone is assessed separately — you can score In-depth on your Proposal and Developing on your Development work if your planning was strong but build output was limited. Your final mark is not an average; it reflects the full picture of your work and process. A game that does not run cannot score above Level 2 on any development criterion.
+      </p>
+</div>
+<div class="outcome-box" style="margin-bottom:1.5rem">
+<div class="outcome-label">HRCE 4-Point Scale</div>
+<ul>
+<li><span class="outcome-code">4</span> <strong>In-depth Knowledge / Understanding</strong> — demonstrates an in-depth understanding of content and concepts; able to extend the application of related skills</li>
+<li><span class="outcome-code">3</span> <strong>Competent Knowledge / Understanding</strong> — competent knowledge and understanding of content and concepts; shows appropriate application of related skills</li>
+<li><span class="outcome-code">2</span> <strong>Developing Knowledge / Understanding</strong> — demonstrates developing knowledge and understanding; developing in the application of related skills</li>
+<li><span class="outcome-code">1</span> <strong>Limited Knowledge / Understanding</strong> — limited knowledge and depth of understanding of content and concepts</li>
+</ul>
+</div>
+<h2>
+      Capstone Evidence → CP12 Outcome Map
+     </h2>
+<table class="scope-table">
+<thead>
+<tr>
+<th>
+         Capstone evidence
+        </th>
+<th>
+         Main CP12 outcomes
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Proposal, track choice, scope, roles, sprint plan
+        </td>
+<td>
+         1.3, 1.4, 2.4, 4.1, 4.2
+        </td>
+</tr>
+<tr>
+<td>
+         Team stand-ups, role responsibilities, shared build decisions
+        </td>
+<td>
+         3.1, 4.3
+        </td>
+</tr>
+<tr>
+<td>
+         Godot scripts, scenes, UI, input, variables, validation, debugging
+        </td>
+<td>
+         2.1, 2.3, 3.2, 3.3, 3.4, 3.6, 4.5
+        </td>
+</tr>
+<tr>
+<td>
+         Resource log, AI-use log, documentation, Google Site
+        </td>
+<td>
+         1.6, 2.6, 4.4, 4.6
+        </td>
+</tr>
+<tr>
+<td>
+         Testing notes, bug fixes, revisions, final demo
+        </td>
+<td>
+         4.7, 4.8
+        </td>
+</tr>
+<tr>
+<td>
+         Final reflection and code-defense answers
+        </td>
+<td>
+         4.9, 4.10
+        </td>
+</tr>
+</tbody>
+</table>
+<h2>
+      Phase Assessment
+     </h2>
+<p style="color:var(--text-muted);font-size:0.92rem;margin:0 0 1.75rem">
+      The capstone is assessed in five phases. Each phase maps to specific CP12 outcomes and has its own criteria. Knowing when each phase is assessed helps you plan where to focus your energy each sprint.
+     </p>
+
+<!-- ── PHASE 1: STUDIO SETUP ──────────────────────────────── -->
+<div style="margin-bottom:2.5rem">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+<span class="lesson-tag capstone" style="font-size:.7rem;padding:.25rem .65rem">Phase 1</span>
+<h3 style="margin:0;font-size:1.15rem;color:var(--text)">Studio Setup</h3>
+<span style="font-size:.82rem;color:var(--text-muted)">Before first sprint — Week 1</span>
+</div>
+<div class="outcome-box" style="margin-bottom:.7rem">
+<div class="outcome-label">CP12 outcomes — this phase</div>
+<ul>
+<li><span class="outcome-code">1.3</span> — understand problem-solving and design strategies</li>
+<li><span class="outcome-code">1.4</span> — understand the role of planning in a project</li>
+<li><span class="outcome-code">4.1</span> — define the problem and establish a project plan</li>
+<li><span class="outcome-code">4.2</span> — determine and evaluate design options</li>
+<li><span class="outcome-code">4.3</span> — collaborate and communicate in a team</li>
+</ul>
+</div>
+<table class="rubric-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th class="level-header l4">Level 4<br/><small>In-depth Knowledge</small></th>
+<th class="level-header l3">Level 3<br/><small>Competent Knowledge</small></th>
+<th class="level-header l2">Level 2<br/><small>Developing Knowledge</small></th>
+<th class="level-header l1">Level 1<br/><small>Limited Knowledge</small></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="criterion">Team Structure &amp; Roles<br/><small style="color:var(--text-muted);font-weight:400">Are roles clear and agreements in place?</small></td>
+<td class="level-4">Roles defined in a written team agreement. Every member is listed on the Google Site Home page and can explain the full plan and their own responsibilities.</td>
+<td class="level-3">Roles assigned and documented. Google Site Home page published. Team has a sprint timeline with weekly targets.</td>
+<td class="level-2">Roles exist but are not written down. Google Site started but not published. Sprint plan is vague or incomplete.</td>
+<td class="level-1">No defined roles or documentation. Google Site not started. No evidence of any planning.</td>
+</tr>
+<tr>
+<td class="criterion">Proposal<br/><small style="color:var(--text-muted);font-weight:400">Is the scope realistic and complete?</small></td>
+<td class="level-4">Proposal includes MVG, stretch goals, sprint timeline, resource list, and a risk analysis. Scope is achievable for the time available and the team can justify every included feature.</td>
+<td class="level-3">Proposal includes MVG features, team roles, and a sprint timeline. All required sections are present and the scope is reasonable.</td>
+<td class="level-2">Proposal has an MVG list but is missing the sprint plan, resource list, or risk section. Scope may be too large or too small.</td>
+<td class="level-1">Proposal is incomplete, has no MVG, or has not been submitted.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── PHASE 2: PROTOTYPE ─────────────────────────────────── -->
+<div style="margin-bottom:2.5rem">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+<span class="lesson-tag capstone" style="font-size:.7rem;padding:.25rem .65rem">Phase 2</span>
+<h3 style="margin:0;font-size:1.15rem;color:var(--text)">Prototype</h3>
+<span style="font-size:.82rem;color:var(--text-muted)">End of Sprint 1</span>
+</div>
+<div class="outcome-box" style="margin-bottom:.7rem">
+<div class="outcome-label">CP12 outcomes — this phase</div>
+<ul>
+<li><span class="outcome-code">2.1</span> — understand syntax and language features</li>
+<li><span class="outcome-code">2.2</span> — understand variables, data types, and structures</li>
+<li><span class="outcome-code">3.1</span> — develop tools, components, and strategies</li>
+<li><span class="outcome-code">3.2</span> — develop a structured solution</li>
+<li><span class="outcome-code">4.5</span> — build, test, and deploy the solution</li>
+</ul>
+</div>
+<table class="rubric-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th class="level-header l4">Level 4<br/><small>In-depth Knowledge</small></th>
+<th class="level-header l3">Level 3<br/><small>Competent Knowledge</small></th>
+<th class="level-header l2">Level 2<br/><small>Developing Knowledge</small></th>
+<th class="level-header l1">Level 1<br/><small>Limited Knowledge</small></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="criterion">Working Player Scene<br/><small style="color:var(--text-muted);font-weight:400">Does the player move with correct physics?</small></td>
+<td class="level-4">Player uses CharacterBody2D/3D with physics. Student demonstrates understanding of velocity, gravity, and input map in context. Behaviour matches the game concept. No console errors.</td>
+<td class="level-3">Player moves in at least two directions and a main action (jump or equivalent) works correctly. Scene runs without crashing.</td>
+<td class="level-2">Player scene exists and basic movement works in one direction. Some physics errors or unexpected behaviour present.</td>
+<td class="level-1">Player scene does not run or the player does not respond to input.</td>
+</tr>
+<tr>
+<td class="criterion">Scene Structure &amp; Evidence<br/><small style="color:var(--text-muted);font-weight:400">Is the build organized and documented?</small></td>
+<td class="level-4">Main scene has descriptive node names and a logical folder structure. At least one build screenshot with a written explanation is added to the Google Site. Student can explain why each node type was chosen.</td>
+<td class="level-3">Scene uses correct node types for the game genre. At least one screenshot of a working build is added to the Google Site.</td>
+<td class="level-2">Scene has basic structure but node names are default or unclear. Limited or no build evidence on the Google Site.</td>
+<td class="level-1">No working build. Scene structure is missing, broken, or cannot be explained.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── PHASE 3: DEVELOPMENT ───────────────────────────────── -->
+<div style="margin-bottom:2.5rem">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+<span class="lesson-tag capstone" style="font-size:.7rem;padding:.25rem .65rem">Phase 3</span>
+<h3 style="margin:0;font-size:1.15rem;color:var(--text)">Development</h3>
+<span style="font-size:.82rem;color:var(--text-muted)">Ongoing — Sprints 2 and 3</span>
+</div>
+<div class="outcome-box" style="margin-bottom:.7rem">
+<div class="outcome-label">CP12 outcomes — this phase</div>
+<ul>
+<li><span class="outcome-code">2.1</span> — understand syntax and language features</li>
+<li><span class="outcome-code">2.3</span> — understand control structures and algorithms</li>
+<li><span class="outcome-code">3.2</span> — develop a structured solution</li>
+<li><span class="outcome-code">3.4</span> — use tools and strategies to solve the problem</li>
+<li><span class="outcome-code">4.5</span> — build and deploy the solution</li>
+<li><span class="outcome-code">4.6</span> — document the project</li>
+<li><span class="outcome-code">4.7</span> — test and refine the solution</li>
+</ul>
+</div>
+<table class="rubric-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th class="level-header l4">Level 4<br/><small>In-depth Knowledge</small></th>
+<th class="level-header l3">Level 3<br/><small>Competent Knowledge</small></th>
+<th class="level-header l2">Level 2<br/><small>Developing Knowledge</small></th>
+<th class="level-header l1">Level 1<br/><small>Limited Knowledge</small></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="criterion">Gameplay &amp; Features<br/><small style="color:var(--text-muted);font-weight:400">Does the game work as proposed?</small></td>
+<td class="level-4">All three MVG features work without errors. At least one stretch feature is present. Player feel and difficulty are clearly tuned and the team can explain why values were chosen.</td>
+<td class="level-3">All three MVG features work. Win and lose conditions both function. Game is playable from start to end with no crashes during normal play.</td>
+<td class="level-2">Two of three MVG features work. Win or lose condition may have bugs. Occasional crashes. Some default values remain unchanged with no explanation.</td>
+<td class="level-1">One or no MVG features work. Game is not playable from start to end. Frequent crashes or non-functional mechanics.</td>
+</tr>
+<tr>
+<td class="criterion">Code Quality<br/><small style="color:var(--text-muted);font-weight:400">Is the code organized and understandable?</small></td>
+<td class="level-4">Code organized into separate, well-named scripts. Variables have meaningful names. Logic is commented. Demonstrates GDScript patterns that extend beyond the warm-up template. Student can explain every line they wrote.</td>
+<td class="level-3">Scripts are correctly structured. Required variables and signals are used appropriately. Basic code organization is clear and the student can explain their key scripts.</td>
+<td class="level-2">Code functions but is largely copied from the warm-up template without meaningful changes. Variable names are unclear. Minimal or no comments.</td>
+<td class="level-1">Code is non-functional, undocumented, or the student cannot explain what it does.</td>
+</tr>
+<tr>
+<td class="criterion">Daily Dev Logs<br/><small style="color:var(--text-muted);font-weight:400">Is daily work documented and verifiable?</small></td>
+<td class="level-4">Log submitted every class session. Answers are specific — names the scene, script, asset, or task worked on. Evidence linked. Blockers and solutions clearly described. AI use fully documented with prompt and reflection.</td>
+<td class="level-3">Log submitted most sessions. Answers are specific enough to verify daily contribution. AI use documented whenever it was used.</td>
+<td class="level-2">Logs missing for some sessions. Answers are vague ("worked on the game"). AI use partially documented or missing entries.</td>
+<td class="level-1">Fewer than half of sessions logged. Answers too vague to verify work. AI use not documented.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── PHASE 4: DOCUMENTATION ─────────────────────────────── -->
+<div style="margin-bottom:2.5rem">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+<span class="lesson-tag capstone" style="font-size:.7rem;padding:.25rem .65rem">Phase 4</span>
+<h3 style="margin:0;font-size:1.15rem;color:var(--text)">Documentation</h3>
+<span style="font-size:.82rem;color:var(--text-muted)">Ongoing — reviewed before demo</span>
+</div>
+<div class="outcome-box" style="margin-bottom:.7rem">
+<div class="outcome-label">CP12 outcomes — this phase</div>
+<ul>
+<li><span class="outcome-code">1.6</span> — consider ethical, moral, and legal issues in IT</li>
+<li><span class="outcome-code">2.6</span> — evaluate programs and documentation</li>
+<li><span class="outcome-code">4.4</span> — locate, evaluate, and select resources</li>
+<li><span class="outcome-code">4.6</span> — document the project</li>
+</ul>
+</div>
+<table class="rubric-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th class="level-header l4">Level 4<br/><small>In-depth Knowledge</small></th>
+<th class="level-header l3">Level 3<br/><small>Competent Knowledge</small></th>
+<th class="level-header l2">Level 2<br/><small>Developing Knowledge</small></th>
+<th class="level-header l1">Level 1<br/><small>Limited Knowledge</small></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="criterion">AI &amp; Resource Log<br/><small style="color:var(--text-muted);font-weight:400">Was help used responsibly and tracked?</small></td>
+<td class="level-4">Every AI use logged with tool, full prompt, what was accepted or changed, what was rejected, and what was learned. Every non-AI resource logged with title, version, what was used, and attribution if required.</td>
+<td class="level-3">AI and resources logged for all major uses. Student can explain each logged entry in context of the project.</td>
+<td class="level-2">Some AI or resource use is logged but entries are incomplete or vague. Student can explain some but not all logged help.</td>
+<td class="level-1">AI or resource use is not logged. Code copied from tutorials or generated by AI cannot be explained by the student.</td>
+</tr>
+<tr>
+<td class="criterion">Google Site Portfolio<br/><small style="color:var(--text-muted);font-weight:400">Is the process fully documented?</small></td>
+<td class="level-4">All six portfolio pages complete, updated throughout the project, and published. Includes daily log responses, annotated build screenshots, commented code snippets, testing notes, and full AI/resource log.</td>
+<td class="level-3">All six pages exist and are published. Most sections are complete. Daily log responses linked or embedded. Evidence is clear enough to verify progress and individual contribution.</td>
+<td class="level-2">Site is published but pages are incomplete. Some daily logs missing. Build evidence is limited. AI/resource log has gaps.</td>
+<td class="level-1">Site not published, inaccessible, or fewer than three pages have content. Daily logs and evidence are missing.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ── PHASE 5: GAME JAM DEMO ─────────────────────────────── -->
+<div style="margin-bottom:2rem">
+<div style="display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem;flex-wrap:wrap">
+<span class="lesson-tag capstone" style="font-size:.7rem;padding:.25rem .65rem">Phase 5</span>
+<h3 style="margin:0;font-size:1.15rem;color:var(--text)">Game Jam Demo</h3>
+<span style="font-size:.82rem;color:var(--text-muted)">Final class — presentation day</span>
+</div>
+<div class="outcome-box" style="margin-bottom:.7rem">
+<div class="outcome-label">CP12 outcomes — this phase</div>
+<ul>
+<li><span class="outcome-code">4.7</span> — test and refine the solution</li>
+<li><span class="outcome-code">4.8</span> — present the solution</li>
+<li><span class="outcome-code">4.9</span> — reflect on learning and process</li>
+<li><span class="outcome-code">4.10</span> — evaluate outcomes</li>
+</ul>
+</div>
+<table class="rubric-table">
+<thead>
+<tr>
+<th>Criterion</th>
+<th class="level-header l4">Level 4<br/><small>In-depth Knowledge</small></th>
+<th class="level-header l3">Level 3<br/><small>Competent Knowledge</small></th>
+<th class="level-header l2">Level 2<br/><small>Developing Knowledge</small></th>
+<th class="level-header l1">Level 1<br/><small>Limited Knowledge</small></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="criterion">Final Build<br/><small style="color:var(--text-muted);font-weight:400">Is the game complete and playable?</small></td>
+<td class="level-4">Game runs without errors. All MVG features work. At least one stretch feature present. Player can complete the full game loop (start → challenge → win or lose state).</td>
+<td class="level-3">Game runs. All three MVG features work. No crashes during normal play. Win and lose conditions both function.</td>
+<td class="level-2">Game runs but some features are broken or missing. Crashes occur during play. Only a partial game loop is available.</td>
+<td class="level-1">Game does not run, does not launch, or core gameplay is not possible.</td>
+</tr>
+<tr>
+<td class="criterion">Demo Presentation<br/><small style="color:var(--text-muted);font-weight:400">Can the team present their work clearly?</small></td>
+<td class="level-4">All features demonstrated clearly. Team explains design decisions with specific examples (tuned speed values, intentional level choices, deliberate AI decisions). Confident answers to follow-up questions from the class or teacher.</td>
+<td class="level-3">Demo is clear. Each team member explains their role and at least one technical or design decision they made.</td>
+<td class="level-2">Demo shows the game but explanations are vague or uneven. Not all team members contribute to the presentation.</td>
+<td class="level-1">No demo or only a brief launch. Team cannot explain how the game was built. Individual contributions are not visible.</td>
+</tr>
+<tr>
+<td class="criterion">Code Defense &amp; Reflection<br/><small style="color:var(--text-muted);font-weight:400">Can each student explain what they built?</small></td>
+<td class="level-4">Each student explains their scripts with specific line references. Clearly describes at least one bug found and fixed, with evidence. Reflection shows deep understanding of what changed from the proposal and why.</td>
+<td class="level-3">Student explains the key scripts they worked on and can answer code-defense questions about those scripts. Reflection addresses all required prompts with specific examples.</td>
+<td class="level-2">Student describes what their code does generally but struggles with specific questions about syntax or design choices. Reflection is surface-level or incomplete.</td>
+<td class="level-1">Student cannot explain the code they submitted. Reflection is missing or too brief to demonstrate any learning.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2>
+      Evidence Types Reference
+     </h2>
+<div class="evidence-grid">
+<div class="evidence-card">
+<div class="evidence-letter">
+        S
+       </div>
+<h4>
+        Screenshot
+       </h4>
+<p>
+        Game running in a state that shows a specific feature working. Label every screenshot with what it shows.
+       </p>
+</div>
+<div class="evidence-card">
+<div class="evidence-letter">
+        E
+       </div>
+<h4>
+        Written response
+       </h4>
+<p>
+        2–5 sentences answering a specific question about a design or technical decision. Be specific — "it works" is not an explanation.
+       </p>
+</div>
+<div class="evidence-card">
+<div class="evidence-letter">
+        C
+       </div>
+<h4>
+        Annotated code
+       </h4>
+<p>
+        A script with comments on every non-obvious line explaining what it does and why. The comments must be written by you — not copied from a tutorial.
+       </p>
+</div>
+<div class="evidence-card">
+<div class="evidence-letter">
+        D
+       </div>
+<h4>
+        Debug log
+       </h4>
+<p>
+        One or more entries describing: what broke, what you tried, what worked. Honest debugging logs show more skill than "it worked first try."
+       </p>
+</div>
+</div>
+</section>
+<!-- end rubric -->
+<!-- ======================================================
+         SUBMISSION CHECKLIST
+         ====================================================== -->
+<section class="section" id="section-checklist">
+<div class="page-header">
+<span class="lesson-tag capstone">
+       Capstone · Step 9
+      </span>
+<h1>
+       Submission Checklist
+      </h1>
+<p class="page-subtitle">
+       Everything that must be submitted before your project is considered complete.
+      </p>
+</div>
+<div class="outcome-box">
+<div class="outcome-label">
+       CP12 outcomes evidenced in this section
+      </div>
+<ul>
+<li>
+<span class="outcome-code">
+         4.2
+        </span>
+        - complete the plan
+       </li>
+<li>
+<span class="outcome-code">
+         4.5
+        </span>
+        - complete the build
+       </li>
+<li>
+<span class="outcome-code">
+         4.6
+        </span>
+        - complete documentation
+       </li>
+<li>
+<span class="outcome-code">
+         4.7
+        </span>
+        - complete testing
+       </li>
+<li>
+<span class="outcome-code">
+         4.8
+        </span>
+        - complete presentation evidence
+       </li>
+<li>
+<span class="outcome-code">
+         4.9
+        </span>
+        - complete reflection
+       </li>
+</ul>
+</div>
+<h2>
+      Before You Submit
+     </h2>
+<p>
+      Go through this checklist with a classmate. If any item is not checked, do not submit yet.
+     </p>
+<h3>
+      Game Build
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Game build checklist
+      </div>
+<ul>
+<li>
+        Game launches without errors in the Godot editor (F5 works)
+       </li>
+<li>
+        Player can move, jump (if applicable), and interact with the world
+       </li>
+<li>
+        Win condition is reachable and triggers correctly
+       </li>
+<li>
+        Lose condition is reachable and triggers correctly (restart or game over)
+       </li>
+<li>
+        No scene is an empty grey box — all areas visible to the player have visual content
+       </li>
+<li>
+        Constants are tuned (speed, gravity, etc. are not default placeholder values)
+       </li>
+<li>
+        All three required features from the proposal are working
+       </li>
+</ul>
+</div>
+<h3>
+      Google Site
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Site checklist
+      </div>
+<ul>
+<li>
+        Google Site is published and opens without requesting access
+       </li>
+<li>
+        Home page includes game title, pitch, track, team members, and roles
+       </li>
+<li>
+        Project Plan page includes proposal, MVG features, stretch goals, and resources
+       </li>
+<li>
+        Daily Dev Logs page includes every class entry for each student
+       </li>
+<li>
+        Build Evidence page includes screenshots, code snippets, bugs fixed, and test notes
+       </li>
+<li>
+        AI + Resource Log page includes all AI prompts/help and non-AI resources used
+       </li>
+<li>
+        Final Reflection page is complete before presentation day
+       </li>
+</ul>
+</div>
+<h3>
+      Daily Accountability
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Daily log checklist
+      </div>
+<ul>
+<li>
+        Every student has a log entry for every project class
+       </li>
+<li>
+        Each entry includes work completed, evidence link, blocker, next task, and confidence status
+       </li>
+<li>
+        AI use is logged on the same day it happened
+       </li>
+<li>
+        Team tracker row is updated with current sprint goal and blocker status
+       </li>
+</ul>
+</div>
+<h3>
+      Evidence Package
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Evidence package checklist
+      </div>
+<ul>
+<li>
+        Minimum 3 screenshots labelled with what each shows
+       </li>
+<li>
+        Minimum 2 written responses (2–5 sentences each) answering specific design questions
+       </li>
+<li>
+        Annotated code for at least one complete script per team member where possible
+       </li>
+<li>
+        At least one debug log entry per team member (problem → what I tried → what worked)
+       </li>
+<li>
+        Approved team design proposal included
+       </li>
+</ul>
+</div>
+<h3>
+      Reflection Document
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Reflection document checklist
+      </div>
+<ul>
+<li>
+        Describes what the game is and how to play it (2–3 sentences)
+       </li>
+<li>
+        Identifies the most difficult technical problem encountered and how it was solved
+       </li>
+<li>
+        Explains at least one design decision — why a mechanic, level design choice, or value was changed
+       </li>
+<li>
+        Compares the final game to the original proposal — what changed and why
+       </li>
+<li>
+        Explains how the team used AI/resources and what was accepted, changed, or rejected
+       </li>
+<li>
+        Identifies one thing you would do differently if you were starting over
+       </li>
+</ul>
+</div>
+<h3>
+      Demo Preparation
+     </h3>
+<div class="callout check">
+<div class="callout-label">
+       Demo preparation checklist
+      </div>
+<ul>
+<li>
+        You can demo the full game loop in under 3 minutes (start → interact → win/lose)
+       </li>
+<li>
+        You can answer: "What does the player do?" without hesitation
+       </li>
+<li>
+        You can answer: "What was the hardest part to build?" with a specific technical answer
+       </li>
+<li>
+        You can answer: "Why did you make [specific design choice]?" for at least two choices
+       </li>
+<li>
+        Every team member can explain one script, node setup, or system they contributed to
+       </li>
+<li>
+        Every team member can explain how AI or resources were used, or state that they did not use AI
+       </li>
+<li>
+        Game runs on the presentation computer (not just your dev machine)
+       </li>
+</ul>
+</div>
+<h2>
+      Submission Format
+     </h2>
+<table class="axis-table">
+<thead>
+<tr>
+<th>
+         Item
+        </th>
+<th>
+         Format
+        </th>
+<th>
+         Where to submit
+        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+         Godot project folder
+        </td>
+<td>
+         Compressed .zip of entire project folder
+        </td>
+<td>
+         As directed by teacher
+        </td>
+</tr>
+<tr>
+<td>
+         Published Google Site
+        </td>
+<td>
+         Public URL
+        </td>
+<td>
+         Class tracking sheet
+        </td>
+</tr>
+<tr>
+<td>
+         Daily dev logs
+        </td>
+<td>
+         Embedded sheet, linked sheet, or site page
+        </td>
+<td>
+         Google Site
+        </td>
+</tr>
+<tr>
+<td>
+         Evidence screenshots
+        </td>
+<td>
+         PNG/JPG embedded and labelled
+        </td>
+<td>
+         Google Site
+        </td>
+</tr>
+<tr>
+<td>
+         Written responses + reflection
+        </td>
+<td>
+         Site page or Google Doc embedded/linked
+        </td>
+<td>
+         Google Site
+        </td>
+</tr>
+<tr>
+<td>
+         Annotated code
+        </td>
+<td>
+         Copy-paste into the Google Doc or include the .gd files in the zip
+        </td>
+<td>
+         As directed by teacher
+        </td>
+</tr>
+<tr>
+<td>
+         AI + resource log
+        </td>
+<td>
+         Table with prompts, resources, decisions, and tests
+        </td>
+<td>
+         Google Site
+        </td>
+</tr>
+<tr>
+<td>
+         Design proposal
+        </td>
+<td>
+         Google Site page or linked Google Doc
+        </td>
+<td>
+         Google Site
+        </td>
+</tr>
+</tbody>
+</table>
+<div class="callout warn">
+<div class="callout-label">
+       Before zipping your Godot project
+      </div>
+<p>
+       Delete the
+       <code>
+        .godot/
+       </code>
+       folder inside your project before zipping — it is automatically regenerated and adds ~100 MB to your file size unnecessarily. Your teacher's computer will regenerate it on import. Keep all your
+       <code>
+        .tscn
+       </code>
+       ,
+       <code>
+        .gd
+       </code>
+       ,
+       <code>
+        .png
+       </code>
+       , and
+       <code>
+        project.godot
+       </code>
+       files.
+      </p>
+</div>
+<div class="callout next">
+<div class="callout-label">
+       You're ready — go build
+      </div>
+<p>
+       You have a team, a published site, a tracker row, a proposal, and a scope check. Start building. Core loop first — movement, win condition, lose condition. Everything else is polish. Keep your logs current.
+      </p>
+</div>
+</section>
+<!-- end checklist -->
+</main>
+</div>
+<script>
+   const sectionLinks = document.querySelectorAll('a[data-section]');
+  const navLinks = document.querySelectorAll('.sidebar nav a[data-section]');
+  const sections = document.querySelectorAll('.section');
+
+  function showSection(id) {
+    sections.forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('section-' + id);
+    if (target) target.classList.add('active');
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.dataset.section === id);
+    });
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + id);
+    }
+  }
+
+  sectionLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showSection(link.dataset.section);
+      window.scrollTo(0, 0);
+    });
+  });
+
+  const initHash = window.location.hash.replace('#', '');
+  if (initHash && document.getElementById('section-' + initHash)) {
+    showSection(initHash);
+  } else {
+    showSection('overview');
+  }
+  </script>
+</body>
+</html>
