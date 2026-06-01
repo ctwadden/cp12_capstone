@@ -757,7 +757,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         Playable Godot Game
        </strong>
 <p>
-        A small 2D or 3D game with player action, a challenge, feedback, and a win/lose or completion condition.
+        A small 2D or 3D game with player action, a challenge, feedback, two playable gameplay scenes, and a win/lose or completion condition.
        </p>
 </div>
 <div class="studio-card">
@@ -865,7 +865,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        What "done" means for this course
       </div>
 <p>
-       A game is done when: it starts, the player can interact with it, something interesting happens as a result, and it ends or loops. You do not need music, professional art, a main menu, settings screens, or save files — those are polish, not the game. Get the core loop working and tested first. Then polish if time allows.
+       A game is done when: it starts, the player can interact with it, something interesting happens as a result, the player can move through at least two playable gameplay scenes or areas, and the game ends or loops. You do not need music, professional art, a main menu, settings screens, or save files — those are polish, not the game. Get the core loop working and tested first. Then expand it into the second required gameplay scene before adding polish.
       </p>
 </div>
 <div class="callout next">
@@ -936,7 +936,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
       <strong>
        2-4 students
       </strong>
-      . A solo project is allowed only with teacher approval. A team larger than 4 needs a very clear role plan because it becomes too easy for one person to disappear inside the group.
+      . A solo project is allowed only with teacher approval and is not an easier version of the capstone. A team larger than 4 needs a very clear role plan — usually a dedicated Sound Designer — because it becomes too easy for one person to disappear inside the group.
      </p>
 <div class="callout warn">
 <div class="callout-label">
@@ -947,21 +947,21 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
       </p>
 </div>
 <h2>
-      Solo Approved Track
+      Studio Format: Team or Solo Approved
      </h2>
 <p>
-      A solo project requires teacher approval before the proposal is submitted. If approved, the student selects
+      Most students should work in a studio team. A solo project requires teacher approval before the proposal is submitted. If approved, the student selects
       <strong>
        Solo Approved
       </strong>
-      as their track in the class tracker. All of the following rules apply.
+      as the team format in the class tracker. Solo Approved is not a separate easier track — it is a build format with the same evidence gates and a smaller scale.
      </p>
 <div class="callout godot">
 <div class="callout-label">
-       What changes on the solo track
+       What changes if you are approved solo
       </div>
 <p>
-       A solo student takes on the Coder role as their primary responsibility plus one secondary role (usually Producer or Level Builder). All scripts are entirely their own work — there is no team to share credit with, which actually makes CP12 outcomes easier to verify. Scope is adjusted downward to reflect one person working alone, but the evidence requirements are identical.
+       A solo student takes on the Coder role as their primary responsibility plus one secondary role, usually Producer or Level Builder. All scripts are entirely their own work — there is no team to share credit with, which makes CP12 outcomes easier to verify. The scale of the levels can be smaller, but the required evidence stays the same: two playable gameplay scenes, working code, daily logs, site documentation, and a code-defense demo.
       </p>
 </div>
 <table class="scope-table">
@@ -971,10 +971,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Requirement
         </th>
 <th>
-         Team (2–5 students)
+         Studio Team (2–4 students)
         </th>
 <th>
-         Solo Approved
+         Solo Approved (same gates, smaller scale)
         </th>
 </tr>
 </thead>
@@ -984,10 +984,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Gameplay scenes
         </td>
 <td>
-         2–3 playable scenes minimum
+         2 playable gameplay scenes minimum; 3 recommended for the strongest projects. Title, menu, win, and lose screens do not count.
         </td>
 <td>
-         1 complete playable scene
+         2 short playable gameplay scenes minimum. Title, menu, win, and lose screens do not count.
         </td>
 </tr>
 <tr>
@@ -995,10 +995,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Required scripts
         </td>
 <td>
-         One per student based on role
+         One complete GDScript file per student based on role
         </td>
 <td>
-         Player movement + one mechanic + one UI script minimum
+         Player movement + one mechanic + one UI or scene-transition script minimum
         </td>
 </tr>
 <tr>
@@ -1006,10 +1006,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Interactive mechanics
         </td>
 <td>
-         2+ mechanics across the team
+         2+ mechanics across the team, such as pickup + hazard, door + timer, enemy + health
         </td>
 <td>
-         1 mechanic (pickup, hazard, or door)
+         2 small mechanics, or one mechanic used in a meaningful variation across both gameplay scenes
         </td>
 </tr>
 <tr>
@@ -1017,10 +1017,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Audio
         </td>
 <td>
-         Shared stretch task or Sound Designer role
+         Shared stretch task; required only if the team has a Sound Designer role
         </td>
 <td>
-         Optional stretch — not required
+         Optional stretch — not required before the core scenes and code are working
         </td>
 </tr>
 <tr>
@@ -1028,7 +1028,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Google Site
         </td>
 <td>
-         Team site — all members contribute pages
+         Team site — all members contribute pages and evidence
         </td>
 <td>
          Individual site — all six pages still required
@@ -1039,7 +1039,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Demo
         </td>
 <td>
-         Team presents together
+         Team presents together; every student answers code-defense questions
         </td>
 <td>
          Solo demo — all code-defense questions answered alone
@@ -1053,7 +1053,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Weekly team tracker review
         </td>
 <td>
-         Weekly 1-on-1 check-in — mandatory, not optional
+         Weekly 1-on-1 check-in — mandatory; missing logs or no visible progress can remove solo approval
         </td>
 </tr>
 </tbody>
@@ -1063,7 +1063,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        Solo does not mean easier
       </div>
 <p>
-       Working alone removes the accountability of teammates. The weekly teacher check-in is mandatory for solo students. If a solo student misses two consecutive check-ins or has no log evidence for a week, they will be redirected to join an existing team.
+       Working alone removes the accountability of teammates. The weekly teacher check-in is mandatory for solo students. If a solo student cannot show two planned gameplay scenes by the proposal checkpoint, or visible progress toward both scenes by the prototype checkpoint, the project will be reset, reduced, or moved into a team.
       </p>
 </div>
 <h2>
@@ -1107,7 +1107,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         Sound Designer
        </strong>
 <p>
-        Creates or sources background music and sound effects, writes an audio style guide, integrates all audio into the game build, and balances levels. Best suited for teams of 5.
+        Creates or sources background music and sound effects, writes an audio style guide, integrates all audio into the game build, and balances levels. Best suited only for a teacher-approved team of 5.
        </p>
 </div>
 </div>
@@ -1712,7 +1712,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         Build Evidence
        </strong>
 <p>
-        Screenshots, short clips, code snippets, test results, bugs fixed, and playable build notes.
+        Screenshots or short clips from both playable gameplay scenes, code snippets, test results, bugs fixed, and playable build notes.
        </p>
 </div>
 <div class="studio-card">
@@ -1901,8 +1901,13 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 <td>Teacher (setup)</td>
 </tr>
 <tr>
-<td>Track</td>
-<td>2D, 3D, Open Concept, Solo Approved</td>
+<td>Build Track</td>
+<td>2D Platformer, 3D Exploration, or Open Concept</td>
+<td>Teacher (setup)</td>
+</tr>
+<tr>
+<td>Team Format</td>
+<td>Studio Team or Solo Approved</td>
 <td>Teacher (setup)</td>
 </tr>
 <tr>
@@ -2357,7 +2362,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        Choose Your Track
       </h1>
 <p class="page-subtitle">
-       Three paths, all valid. Pick the one that matches what you want to build and what you have already learned.
+       Three build tracks, all valid. Pick the one that matches what you want to build and what you have already learned. Every track must include at least two playable gameplay scenes.
       </p>
 </div>
 <div class="outcome-box">
@@ -2404,7 +2409,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        </p>
 <ul>
 <li>
-         Multiple connected levels or one large scrolling level
+         At least two connected playable levels or rooms; three recommended if the levels are simple
         </li>
 <li>
          Animated player with at least 3 animation states
@@ -2429,7 +2434,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        </p>
 <ul>
 <li>
-         3D environment with distinct areas or rooms
+         At least two distinct playable rooms or areas; three recommended if the areas are simple
         </li>
 <li>
          CharacterBody3D player with full movement and jump
@@ -2460,6 +2465,9 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
          Must use Godot 4 and at least two of: physics bodies, signals, timers, UI, scenes
         </li>
 <li>
+         Must have at least two playable gameplay scenes or areas; menus and end screens do not count
+        </li>
+<li>
          Must have a clear player action, consequence, and win/lose state
         </li>
 <li>
@@ -2467,6 +2475,14 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         </li>
 </ul>
 </div>
+</div>
+<div class="callout warn">
+<div class="callout-label">
+       Scene minimum for every track
+      </div>
+<p>
+       The capstone minimum is now two playable gameplay scenes, rooms, levels, or areas. A title screen, pause menu, win screen, or lose screen is useful, but it does not count as one of the two required gameplay scenes. This prevents a project from becoming one tiny room with a quick ending.
+      </p>
 </div>
 <div class="callout next">
 <div class="callout-label">
@@ -2559,10 +2575,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        Team name, team members, roles, and published Google Site URL
       </li>
 <li>
-       Chosen track: 2D Platformer, 3D Exploration, Open Concept, or Solo Approved
+       Chosen build track: 2D Platformer, 3D Exploration, or Open Concept; team format: Studio Team or Solo Approved
       </li>
 <li>
-       Game title, one-sentence pitch, player action, win condition, and lose condition
+       Game title, one-sentence pitch, player action, win condition, lose condition, and the plan for two playable gameplay scenes
       </li>
 <li>
        Three Minimum Viable Game features plus one optional stretch goal
@@ -2604,7 +2620,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        Next step — Scope Calibration
       </div>
 <p>
-       After the proposal is approved, use the Scope Calibration section to check that your three required features are realistic for the time available.
+       After the proposal is approved, use the Scope Calibration section to check that your two gameplay scenes and three required features are realistic for the time available.
       </p>
 </div>
 </section>
@@ -2736,16 +2752,16 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 <tr>
 <td>
 <strong>
-          At least 2 scenes
+          At least 2 playable gameplay scenes
          </strong>
-         — one gameplay scene plus a win/lose screen or title screen with a scene transition
+         — two distinct levels, rooms, or areas where the player can move, interact, and make progress. Title, menu, win, and lose screens do not count.
         </td>
 <td>
-         Proves the student can manage multiple scenes and use
+         Proves the student can manage multiple scenes, design progression, and use
          <code>
           change_scene_to_file()
          </code>
-         .
+         or another clear transition system.
         </td>
 </tr>
 <tr>
@@ -2775,7 +2791,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        Why these requirements prevent a two-class submission
       </div>
 <p>
-       A student who genuinely implements player physics, an interactive mechanic, a HUD, win and lose conditions, and a scene transition — with a daily log entry for every class — has done roughly 8–12 hours of focused Godot work. That cannot be faked in two classes. The logs are your strongest protection: if entries are thin for the first three weeks and everything appears in the final week, that pattern is the conversation.
+       A student who genuinely implements player physics, two playable gameplay scenes, at least two interactive mechanics, a HUD, win and lose conditions, and a transition system — with a daily log entry for every class — has done roughly 8–12 hours of focused Godot work. That cannot be faked in two classes. The logs are your strongest protection: if entries are thin for the first three weeks and everything appears in the final week, that pattern is the conversation.
       </p>
 </div>
 <div class="callout warn">
@@ -2886,7 +2902,18 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 </tr>
 <tr>
 <td>
-         Multiple levels with scene transitions
+         Second playable gameplay scene + transition
+        </td>
+<td>
+         60–120 min
+        </td>
+<td class="ok">
+         ✓ Core
+        </td>
+</tr>
+<tr>
+<td>
+         Third playable gameplay scene or larger connected world
         </td>
 <td>
          90–150 min
@@ -3030,6 +3057,12 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        </strong>
 </li>
 <li>
+       Without two playable gameplay scenes — too thin for a capstone.
+       <strong>
+        Required.
+       </strong>
+</li>
+<li>
        Without sprite animation — still a game (colored rectangle works).
        <strong>
         Nice to have.
@@ -3053,7 +3086,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
        The "build in order" rule
       </div>
 <p>
-       Always build in this order: (1) Player can move, (2) Player can die / lose, (3) Player can win, (4) The whole loop works start to finish. Only then add anything else. If you add art before the loop works, you have a pretty demo that is not a game.
+       Always build in this order: (1) Player can move, (2) Player can die / lose, (3) Player can win, (4) The first loop works start to finish, (5) Add the second playable gameplay scene and transition, (6) Test the whole loop again. Only then add polish. If you add art before the loop works, you have a pretty demo that is not a game.
       </p>
 </div>
 <h2>
@@ -3782,10 +3815,10 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
 <tbody>
 <tr>
 <td class="criterion">Gameplay &amp; Features<br/><small style="color:var(--text-muted);font-weight:400">Does the game work as proposed?</small></td>
-<td class="level-4">All three MVG features work without errors. At least one stretch feature is present. Player feel and difficulty are clearly tuned and the team can explain why values were chosen.</td>
-<td class="level-3">All three MVG features work. Win and lose conditions both function. Game is playable from start to end with no crashes during normal play.</td>
-<td class="level-2">Two of three MVG features work. Win or lose condition may have bugs. Occasional crashes. Some default values remain unchanged with no explanation.</td>
-<td class="level-1">One or no MVG features work. Game is not playable from start to end. Frequent crashes or non-functional mechanics.</td>
+<td class="level-4">All three MVG features work without errors. The game includes three playable gameplay scenes, or two highly polished scenes with a clearly justified scope. At least one stretch feature is present. Player feel and difficulty are tuned and the team can explain why values were chosen.</td>
+<td class="level-3">All three MVG features work. At least two playable gameplay scenes are complete. Win and lose conditions both function. Game is playable from start to end with no crashes during normal play.</td>
+<td class="level-2">Only one playable gameplay scene is complete, or two of three MVG features work. Win or lose condition may have bugs. Occasional crashes. Some default values remain unchanged with no explanation.</td>
+<td class="level-1">No complete playable gameplay scene, or one/no MVG features work. Game is not playable from start to end. Frequent crashes or non-functional mechanics.</td>
 </tr>
 <tr>
 <td class="criterion">Code Quality<br/><small style="color:var(--text-muted);font-weight:400">Is the code organized and understandable?</small></td>
@@ -4060,7 +4093,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         Google Site is published and opens without requesting access
        </li>
 <li>
-        Home page includes game title, pitch, track, team members, and roles
+        Home page includes game title, pitch, build track, team format, team members, and roles
        </li>
 <li>
         Project Plan page includes proposal, MVG features, stretch goals, and resources
@@ -4069,7 +4102,7 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
         Daily Dev Logs page includes every class entry for each student
        </li>
 <li>
-        Build Evidence page includes screenshots, code snippets, bugs fixed, and test notes
+        Build Evidence page includes screenshots from both playable gameplay scenes, code snippets, bugs fixed, and test notes
        </li>
 <li>
         AI + Resource Log page includes all AI prompts/help and non-AI resources used
@@ -4110,13 +4143,13 @@ hr { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
       </div>
 <ul>
 <li>
-        Minimum 3 screenshots labelled with what each shows
+        Minimum 4 screenshots labelled with what each shows, including evidence from both required gameplay scenes
        </li>
 <li>
         Minimum 2 written responses (2–5 sentences each) answering specific design questions
        </li>
 <li>
-        Annotated code for at least one complete script per team member where possible
+        Annotated code for at least one complete script per team member where possible, including the scene-transition or level-change code
        </li>
 <li>
         At least one debug log entry per team member (problem → what I tried → what worked)
