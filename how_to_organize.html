@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Godot Group Project Sharing Guide</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel2: #172033;
+      --blue: #38bdf8;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #fb7185;
+      --purple: #a78bfa;
+      --text: #e5e7eb;
+      --muted: #aab3c5;
+      --white: #ffffff;
+      --border: rgba(255,255,255,.14);
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,.18), transparent 35%),
+        radial-gradient(circle at top right, rgba(167,139,250,.16), transparent 35%),
+        linear-gradient(180deg, #0b1020 0%, #0f172a 60%, #111827 100%);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 22px 60px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, rgba(56,189,248,.22), rgba(167,139,250,.18));
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 34px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero:after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 250px;
+      height: 250px;
+      background: rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .label {
+      display: inline-block;
+      background: rgba(52,211,153,.16);
+      color: #a7f3d0;
+      border: 1px solid rgba(52,211,153,.35);
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: .98;
+      margin: 18px 0 16px;
+      max-width: 880px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 38px);
+      margin: 0 0 14px;
+      line-height: 1.05;
+    }
+
+    h3 {
+      font-size: 21px;
+      margin: 0 0 10px;
+    }
+
+    p { margin: 0 0 14px; color: var(--muted); }
+
+    .hero p {
+      max-width: 850px;
+      font-size: 18px;
+      color: #d8e4f5;
+    }
+
+    .big-answer {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .answer-card {
+      background: rgba(15,23,42,.72);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .answer-card strong {
+      color: var(--white);
+      display: block;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .section {
+      margin-top: 28px;
+      background: rgba(17,24,39,.82);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: 0 12px 36px rgba(0,0,0,.20);
+    }
+
+    .grid-2, .grid-3, .grid-4 {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .card.drive { border-color: rgba(52,211,153,.35); }
+    .card.github { border-color: rgba(56,189,248,.38); }
+    .card.warning { border-color: rgba(251,191,36,.45); }
+    .card.danger { border-color: rgba(251,113,133,.45); }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin-bottom: 12px;
+    }
+
+    .badge.green { background: rgba(52,211,153,.17); color: #a7f3d0; }
+    .badge.blue { background: rgba(56,189,248,.17); color: #bae6fd; }
+    .badge.yellow { background: rgba(251,191,36,.16); color: #fde68a; }
+    .badge.red { background: rgba(251,113,133,.16); color: #fecdd3; }
+    .badge.purple { background: rgba(167,139,250,.17); color: #ddd6fe; }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .flow-step {
+      min-height: 120px;
+      background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.035));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(56,189,248,.18);
+      border: 1px solid rgba(56,189,248,.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #bae6fd;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .folder-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .folder {
+      border: 1px dashed rgba(255,255,255,.25);
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+      border-radius: 14px;
+      font-weight: 700;
+      color: #eaf6ff;
+    }
+
+    .folder small {
+      display: block;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 16px;
+      margin-top: 12px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(56,189,248,.12);
+      color: #dff7ff;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    code, pre {
+      font-family: Consolas, Monaco, 'Courier New', monospace;
+    }
+
+    code {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 2px 6px;
+      border-radius: 7px;
+      color: #f8fafc;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      background: #08111f;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 16px;
+      padding: 16px;
+      color: #dbeafe;
+      overflow-x: auto;
+    }
+
+    .callout {
+      border-left: 5px solid var(--yellow);
+      background: rgba(251,191,36,.09);
+      padding: 16px 18px;
+      border-radius: 14px;
+      margin: 16px 0;
+    }
+
+    .callout.blue { border-left-color: var(--blue); background: rgba(56,189,248,.09); }
+    .callout.green { border-left-color: var(--green); background: rgba(52,211,153,.09); }
+    .callout.red { border-left-color: var(--red); background: rgba(251,113,133,.09); }
+
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .check {
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .check:before {
+      content: "□";
+      color: #bae6fd;
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .mini-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: #93c5fd;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .footer {
+      margin-top: 30px;
+      color: #9ca3af;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    a { color: #7dd3fc; }
+
+    @media (max-width: 980px) {
+      .grid-4, .flow { grid-template-columns: repeat(2, 1fr); }
+      .grid-3, .folder-list { grid-template-columns: repeat(2, 1fr); }
+      .big-answer, .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 22px 14px 40px; }
+      .hero, .section { padding: 22px; border-radius: 22px; }
+      .grid-3, .grid-4, .flow, .folder-list, .checklist { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: white; color: #111827; }
+      .hero, .section, .card, .flow-step, .answer-card { box-shadow: none; background: white; color: #111827; border-color: #d1d5db; }
+      p, .hero p, .card p, td { color: #374151; }
+      h1, h2, h3, strong { color: #111827; }
+      code, pre { background: #f3f4f6; color: #111827; border-color: #d1d5db; }
+      .page { max-width: 100%; padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <span class="label">CP12 Godot Capstone</span>
+      <h1>How Your Game Studio Shares Work</h1>
+      <p>This guide shows your group how to work together on a Godot game without losing files, overwriting scenes, or depending on GitHub Desktop.</p>
+      <div class="big-answer">
+        <div class="answer-card">
+          <strong>Recommended for most groups</strong>
+          <p><b>Use Google Drive as the main workspace.</b> It is easier for sharing images, sounds, 3D models, screenshots, planning, and final ZIP files.</p>
+        </div>
+        <div class="answer-card">
+          <strong>Optional evidence upgrade</strong>
+          <p><b>Use GitHub for checkpoints.</b> GitHub is useful for code history, README notes, and small project files, but it is not ideal for huge game assets through the browser.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>The Big Rule</h2>
+      <div class="callout red">
+        <h3>Do not have every group member editing the same Godot project at the same time.</h3>
+        <p>Godot projects are made of scenes, scripts, assets, imports, and settings. If everyone changes the same files, your group can accidentally break or overwrite the project.</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><h3>Plan</h3><p>Decide roles and features.</p></div>
+        <div class="flow-step"><div class="num">2</div><h3>Build</h3><p>Each person makes one assigned part.</p></div>
+        <div class="flow-step"><div class="num">3</div><h3>Share</h3><p>Upload code, art, audio, or scenes to Drive.</p></div>
+        <div class="flow-step"><div class="num">4</div><h3>Integrate</h3><p>One person adds approved work into the master project.</p></div>
+        <div class="flow-step"><div class="num">5</div><h3>Test</h3><p>Run the game, fix bugs, and record evidence.</p></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Which System Should Your Group Use?</h2>
+      <div class="grid-2">
+        <div class="card drive">
+          <span class="badge green">Easier / Recommended</span>
+          <h3>Path A: Google Drive Only</h3>
+          <p>Best for beginner groups. Use this when you need the simplest possible system.</p>
+          <table>
+            <tr><th>Best for</th><td>Images, sprites, sounds, 3D models, screenshots, planning docs, dev logs, final ZIP submission</td></tr>
+            <tr><th>Main benefit</th><td>Easy sharing and fewer setup problems</td></tr>
+            <tr><th>Weakness</th><td>Less code history than GitHub</td></tr>
+          </table>
+        </div>
+        <div class="card github">
+          <span class="badge blue">Optional / Advanced</span>
+          <h3>Path B: Google Drive + GitHub</h3>
+          <p>Best for groups that can handle extra steps. GitHub becomes your process portfolio.</p>
+          <table>
+            <tr><th>Best for</th><td>Scripts, README, dev log, screenshots, small scenes, code checkpoints</td></tr>
+            <tr><th>Main benefit</th><td>Shows progress over time</td></tr>
+            <tr><th>Weakness</th><td>Browser upload has size limits and is not automatic</td></tr>
+          </table>
+        </div>
+      </div>
+      <div class="callout green">
+        <h3>Teacher recommendation</h3>
+        <p>Start with <b>Google Drive Only</b>. Add GitHub only after the group understands how to organize and share files.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Step 1: Create the Google Drive Group Folder</h2>
+      <p>One student creates the main folder and shares it with all group members and the teacher.</p>
+      <pre>CP12_Godot_Game_GroupName</pre>
+      <div class="folder-list">
+        <div class="folder">01_Planning<small>Proposal, task list, game idea, roles</small></div>
+        <div class="folder">02_Assets<small>Images, sprites, sounds, models</small></div>
+        <div class="folder">03_Code_Snippets<small>Scripts and code notes</small></div>
+        <div class="folder">04_Feature_Handoffs<small>Small scenes or features ready to be added</small></div>
+        <div class="folder">05_Screenshots_Testing<small>Bug evidence, screenshots, test notes</small></div>
+        <div class="folder">06_Final_Submission<small>Final ZIP, final reflection, final links</small></div>
+      </div>
+      <div class="callout blue">
+        <h3>Drive sharing rule</h3>
+        <p>The folder should be shared with group members as <b>Editor</b> and shared with the teacher so progress can be checked.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Step 2: Choose Group Roles</h2>
+      <div class="grid-3">
+        <div class="card"><span class="badge purple">Role</span><h3>Project Manager</h3><p>Keeps the task list updated and makes sure the group knows what to do next.</p></div>
+        <div class="card"><span class="badge purple">Role</span><h3>Godot Integrator</h3><p>Controls the master project and adds approved work from the group.</p></div>
+        <div class="card"><span class="badge purple">Role</span><h3>Code Lead</h3><p>Works on movement, scoring, collisions, UI, enemies, or other scripts.</p></div>
+        <div class="card"><span class="badge purple">Role</span><h3>Asset Lead</h3><p>Creates or finds images, sprites, audio, 3D models, and interface assets.</p></div>
+        <div class="card"><span class="badge purple">Role</span><h3>Tester</h3><p>Runs the game, finds bugs, takes screenshots, and records what needs fixing.</p></div>
+        <div class="card"><span class="badge purple">Role</span><h3>Documenter</h3><p>Writes the daily log and gathers evidence for the final submission.</p></div>
+      </div>
+      <div class="callout red">
+        <h3>Scene ownership rule</h3>
+        <p>Only one person should edit a major scene such as <code>MainLevel.tscn</code> at a time. Other students should send assets, scripts, or small feature scenes to the Integrator.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Step 3: Daily Class Workflow</h2>
+      <div class="grid-3">
+        <div class="card">
+          <span class="badge blue">Start of class</span>
+          <h3>Plan the work</h3>
+          <p>Open the task list. Decide who is doing what today. Make sure two people are not editing the same scene.</p>
+        </div>
+        <div class="card">
+          <span class="badge yellow">During class</span>
+          <h3>Build and share</h3>
+          <p>Work on your assigned part. Upload assets, code, screenshots, or feature handoffs to Google Drive.</p>
+        </div>
+        <div class="card">
+          <span class="badge green">End of class</span>
+          <h3>Test and document</h3>
+          <p>The Integrator saves the master project. The group tests the game and writes the dev log.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How to Share Code</h2>
+      <p>Do not just paste random code into the group chat. Put code in the <code>03_Code_Snippets</code> folder with instructions.</p>
+      <pre>File name example:
+ava_player_movement_june5.txt
+
+Feature:
+Player movement
+
+Put this script on:
+Player.tscn
+
+Required input actions:
+move_left
+move_right
+jump
+
+Code:
+Paste your code here.
+
+Known bugs:
+The player slides too much after landing.</pre>
+    </section>
+
+    <section class="section">
+      <h2>How to Share Images, Sounds, and Models</h2>
+      <div class="grid-2">
+        <div class="card drive">
+          <span class="badge green">Good file names</span>
+          <pre>player_idle.png
+enemy_robot.png
+coin_pickup.wav
+alien_planet_scene.glb
+main_menu_background.jpg</pre>
+        </div>
+        <div class="card danger">
+          <span class="badge red">Bad file names</span>
+          <pre>image1.png
+new thing.png
+finalfinal.png
+download.png
+untitled.wav</pre>
+        </div>
+      </div>
+      <div class="callout yellow">
+        <h3>Large file rule</h3>
+        <p>Large files such as <code>.glb</code>, <code>.blend</code>, <code>.mp4</code>, and high-resolution images should stay in Google Drive.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>How to Hand Off a Godot Feature</h2>
+      <p>If you build a small part of the game, do not send the entire project. Send only the files needed for that feature.</p>
+      <pre>Folder name example:
+liam_enemy_chase_june5
+
+Include:
+Enemy.tscn
+enemy_chase.gd
+enemy_robot.png
+README.txt
+
+README.txt should explain:
+1. What the feature does
+2. Which files are included
+3. Where the files should go
+4. How to test the feature
+5. Any known bugs</pre>
+    </section>
+
+    <section class="section">
+      <h2>Daily Dev Log Template</h2>
+      <p>Each group must keep a simple record of progress. This can be a Google Doc or the GitHub README.</p>
+      <pre>Date:
+Group members present:
+
+What we worked on:
+
+What changed in the game:
+
+What worked:
+
+What problems or bugs happened:
+
+What we need to do next:
+
+Evidence uploaded:</pre>
+    </section>
+
+    <section class="section">
+      <h2>Optional: GitHub Setup for Checkpoints</h2>
+      <p>Use this only if your group is ready. GitHub is not replacing Google Drive. It is for checkpoint evidence.</p>
+      <div class="grid-4">
+        <div class="flow-step"><div class="num">1</div><h3>Sign in</h3><p>Go to GitHub and sign in or create an account.</p></div>
+        <div class="flow-step"><div class="num">2</div><h3>New repo</h3><p>Create a repository named <code>cp12-godot-groupname</code>.</p></div>
+        <div class="flow-step"><div class="num">3</div><h3>Add README</h3><p>Add a <code>README.md</code> file explaining the game and group roles.</p></div>
+        <div class="flow-step"><div class="num">4</div><h3>Upload files</h3><p>Use <b>Add file → Upload files</b> for scripts, small scenes, screenshots, and notes.</p></div>
+      </div>
+      <div class="callout yellow">
+        <h3>Important GitHub warning</h3>
+        <p>GitHub browser upload is not automatic and it has file-size limits. Large game assets should stay in Google Drive.</p>
+      </div>
+      <h3>Suggested GitHub folders</h3>
+      <div class="folder-list">
+        <div class="folder">scripts<small>Small <code>.gd</code> files</small></div>
+        <div class="folder">scenes<small>Small <code>.tscn</code> scenes</small></div>
+        <div class="folder">screenshots<small>Evidence images</small></div>
+        <div class="folder">docs<small>Dev log and testing notes</small></div>
+        <div class="folder">small_assets<small>Only small files</small></div>
+        <div class="folder">README.md<small>Project overview and links</small></div>
+      </div>
+      <div class="callout blue">
+        <h3>How to make a folder in GitHub web</h3>
+        <p>GitHub does not really use empty folders. To create a folder in the web editor, create a new file with a path such as <code>docs/devlog.md</code> or upload a folder that already contains files.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What Goes Where?</h2>
+      <table>
+        <tr><th>Type of work</th><th>Put it in Google Drive?</th><th>Put it in GitHub?</th></tr>
+        <tr><td>Planning document</td><td>Yes</td><td>Optional</td></tr>
+        <tr><td>Daily dev log</td><td>Yes</td><td>Yes, if using GitHub</td></tr>
+        <tr><td>Small <code>.gd</code> scripts</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Small <code>.tscn</code> scenes</td><td>Yes</td><td>Yes</td></tr>
+        <tr><td>Sprites and small images</td><td>Yes</td><td>Optional</td></tr>
+        <tr><td>Large <code>.glb</code>, <code>.blend</code>, or videos</td><td>Yes</td><td>No</td></tr>
+        <tr><td>Final zipped Godot project</td><td>Yes</td><td>No, unless small</td></tr>
+        <tr><td>Screenshots of progress</td><td>Yes</td><td>Yes</td></tr>
+      </table>
+    </section>
+
+    <section class="section">
+      <h2>End-of-Class Checklist</h2>
+      <div class="checklist">
+        <div class="check">Godot project saved</div>
+        <div class="check">Master version tested</div>
+        <div class="check">New assets uploaded to Google Drive</div>
+        <div class="check">New code or feature handoff uploaded</div>
+        <div class="check">Screenshot or bug evidence added</div>
+        <div class="check">Daily dev log updated</div>
+        <div class="check">GitHub checkpoint uploaded, if your group is using GitHub</div>
+        <div class="check">Group knows the next task</div>
+      </div>
+      <div class="callout green">
+        <h3>Final rule</h3>
+        <p>If the work is not saved in Google Drive or GitHub, it cannot be used as project evidence.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Minimum System for Beginners</h2>
+      <p>If your group is overwhelmed, use this simple version:</p>
+      <div class="flow">
+        <div class="flow-step"><div class="num">1</div><h3>One Drive folder</h3><p>All group work goes into the shared folder.</p></div>
+        <div class="flow-step"><div class="num">2</div><h3>One master project</h3><p>Only the Integrator controls the main Godot project.</p></div>
+        <div class="flow-step"><div class="num">3</div><h3>One task each</h3><p>Every student owns one feature or asset job.</p></div>
+        <div class="flow-step"><div class="num">4</div><h3>One daily log</h3><p>Write what changed and what broke.</p></div>
+        <div class="flow-step"><div class="num">5</div><h3>One final ZIP</h3><p>Submit the final project through Drive/Classroom.</p></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      CP12 Godot Capstone Sharing Guide • Use Google Drive for collaboration • Use GitHub only for optional checkpoints
+    </div>
+  </main>
+</body>
+</html>
